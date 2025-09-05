@@ -22,7 +22,7 @@ const countdownFunction = setInterval(() => {
 
 }, 1000);
 
-const text = "Join the ultimate 24-hour coding marathon to solve real-world problems.";
+const text = "Join the ultimate 36-hour coding marathon to solve real-world problems.";
 const typingElement = document.getElementById("typing-text");
 let index = 0;
 
@@ -35,3 +35,51 @@ function typeLetterByLetter() {
 }
 
 window.onload = typeLetterByLetter;
+
+
+let map;
+
+    async function initMap() {
+
+        const location = { lat: 17.8691423, lng: 83.2956262 }; //NSRIT CSE Block
+
+        const { Map } = await google.maps.importLibrary("maps");
+
+        // The map, centered at the specified location
+        map = new Map(document.getElementById("map"), {
+            zoom: 16,
+            center: location,
+        });
+
+        // Add a marker for the location
+        new google.maps.Marker({
+            position: location,
+            map: map,
+            title: "New York City"
+        });
+    }
+
+    // Get the button element by its ID
+const backToTopButton = document.getElementById("back-to-top-btn");
+
+// Show the button when the user scrolls down 200px from the top
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+  // Check both documentElement and body for cross-browser compatibility
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document smoothly
+backToTopButton.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});XMLDocument  
