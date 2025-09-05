@@ -84,18 +84,22 @@
 
 
     <div class="form-container">
-        <section class="registration">
+        <form class="registration" id="registrationForm">
         <h1>Register Here !</h1>
             <div class="registration-form">
-                <input type="text" placeholder="Team Name">
-                <input type="text" placeholder=" Team Leader's Name">
-                <input type="text" placeholder="Enter full names of all team members">
-                <input type="email" placeholder="Team Leader's Email">
-                <input type="text" placeholder="College Name">
-                <input type="text" placeholder="Team Leader's Phone Number">
+                <input type="text" id="teamName" placeholder="Team Name" required>
+                <input type="text" id="leaderName" placeholder=" Team Leader's Name">
+                <input type="text" id="member1" placeholder="Member 1">
+                <input type="text" id="member2" placeholder="Member 2">
+                <input type="text" id="member3" placeholder="Member 3">
+                <input type="email" id="email" placeholder="Team Leader's Email" required>
+                <input type="text" id="college" placeholder="College Name" required>
+                <input type="text" id="phonenum" placeholder="Team Leader's Phone Number" required>
                 <button type="submit" class="registration-button">Submit</button>
             </div>
-        </section>
+        </form>
+
+        <p id="responseMessage"></p>
     </div>
 
     <section class="contact">
