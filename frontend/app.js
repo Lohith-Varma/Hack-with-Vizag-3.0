@@ -1,3 +1,12 @@
+
+  const menuToggle = document.getElementById('menu-toggle');
+  const navbar = document.getElementById('navbar');
+
+  menuToggle.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+  });
+
+
 const countdownDate = new Date("Sep 26, 2025 07:00:00").getTime();
 
 const countdownFunction = setInterval(() => {
@@ -37,27 +46,27 @@ function typeLetterByLetter() {
 window.onload = typeLetterByLetter;
 
 
-let map;
+// let map;
 
-    async function initMap() {
+// async function initMap() {
 
-        const location = { lat: 17.8691423, lng: 83.2956262 }; //NSRIT CSE Block
+//     const location = { lat: 17.8691423, lng: 83.2956262 }; //NSRIT CSE Block
 
-        const { Map } = await google.maps.importLibrary("maps");
+//     const { Map } = await google.maps.importLibrary("maps");
 
-        // The map, centered at the specified location
-        map = new Map(document.getElementById("map"), {
-            zoom: 16,
-            center: location,
-        });
+//     // The map, centered at the specified location
+//     map = new Map(document.getElementById("map"), {
+//         zoom: 16,
+//         center: location,
+//     });
 
-        // Add a marker for the location
-        new google.maps.Marker({
-            position: location,
-            map: map,
-            title: "New York City"
-        });
-    }
+//     // Add a marker for the location
+//     new google.maps.Marker({
+//         position: location,
+//         map: map,
+//         title: "New York City"
+//     });
+// }
 
     // Get the button element by its ID
 const backToTopButton = document.getElementById("back-to-top-btn");
@@ -82,4 +91,23 @@ backToTopButton.addEventListener("click", function() {
         top: 0,
         behavior: 'smooth'
     });
-});XMLDocument  
+});
+
+const faqComponent = document.querySelector('.faq-container');
+
+if (faqComponent) {
+const faqItems = faqComponent.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const questionButton = item.querySelector('.faq-question');
+
+        questionButton.addEventListener('click', () => {
+            const currentlyActiveItem = faqComponent.querySelector('.faq-item.active');
+            
+            if (currentlyActiveItem && currentlyActiveItem !== item) {
+                currentlyActiveItem.classList.remove('active');
+            }
+            item.classList.toggle('active');
+        });
+    });
+}
