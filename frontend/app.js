@@ -1,4 +1,28 @@
-const text = "Join the ultimate 24-hour coding marathon to solve real-world problems.";
+const countdownDate = new Date("Sep 26, 2025 07:00:00").getTime();
+
+const countdownFunction = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+
+    if (distance < 0) {
+        clearInterval(countdownFunction);
+        document.getElementById("countdown").innerHTML = "<h3>The Hackathon has started!</h3>";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    document.getElementById("days").innerText = String(days).padStart(2, '0');
+    document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+    document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+    document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+
+}, 1000);
+
+const text = "Join the ultimate 36-hour coding marathon to solve real-world problems.";
 const typingElement = document.getElementById("typing-text");
 let index = 0;
 
@@ -13,34 +37,138 @@ function typeLetterByLetter() {
 window.onload = typeLetterByLetter;
 
 document.getElementById("registrationForm").addEventListener("submit", async (e) => {
+
   e.preventDefault();
 
-  const teamName = document.getElementById("teamName").value;
-  const leaderName = document.getElementById("leaderName").value;
-  const member1 = document.getElementById("member1").value;
-  const member2 = document.getElementById("member2").value;
-  const member3 = document.getElementById("member3").value;
-  const email = document.getElementById("email").value;
-  const college = document.getElementById("college").value;
-  const phonenum = document.getElementById("phonenum").value;
+  const responseMessageElement = document.getElementById("responseMessage");
 
+  responseMessageElement.textContent = "";
 
-  const teamMembers = [member1, member2, member3].filter((m) => m.trim() !== "");
+  const teamName = document.getElementById("team-name").value.trim();
+  const collegeName = document.getElementById("college-name").value.trim();
+  const leaderName = document.getElementById("leader-name").value.trim();
+  const leaderRoll = document.getElementById("leader-roll").value.trim();
+  const leaderEmail = document.getElementById("leader-mail").value.trim();
+  const leaderPhone = document.getElementById("leader-phone").value.trim();
+  const member2Name = document.getElementById("member2-name").value.trim();
+  const member2Roll = document.getElementById("member2-roll").value.trim();
+  const member3Name = document.getElementById("member3-name").value.trim();
+  const member3Roll = document.getElementById("member3-roll").value.trim();
+  const member4Name = document.getElementById("member4-name").value.trim();
+  const member4Roll = document.getElementById("member4-roll").value.trim();
+
+  if (!teamName || !collegeName || !leaderName || !leaderRoll || !leaderEmail || !leaderPhone || !member2Name || !member2Roll || !member3Name || !member3Roll) {
+      responseMessageElement.textContent = "Please fill out all required fields.";
+      responseMessageElement.style.color = "red";
+      return; // Stop the function if validation fails
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailPattern.test(leaderEmail)) {
+    responseMessageElement.textContent = "Please enter a valid email address.";
+    responseMessageElement.style.color = "red";
+    return;
+  }
+
+  const phonePattern = /^\d{10}$/;
+  if(!phonePattern.test(leaderPhone)) {
+    responseMessageElement.textContent = "Please enter a valid 10-digit mobile number.";
+    responseMessageElement.style.color = "red";
+    return;
+  }
+
+  const registrationData = {
+    teamName,
+    collegeName,
+    leader: {
+      name: leaderName,
+      roll: leaderRoll,
+      email: leaderEmail,
+      phone: leaderPhone,
+    },
+    members: [
+      {name: member2Name, roll: member2Roll},
+      {name: member3Name, roll: member3Roll},
+    ],
+  };
+
+  if (member4Name && member4Roll) {
+      registrationData.members.push({ name: member4Name, roll: member4Roll });
+  }
 
   try{
+    responseMessageElement.textContent = "Submitting...";
+    responseMessageElement.style.color = "orange";
+
     const response = await fetch("http://localhost:5000/register", {
       method: "POST",
-      headers:{ "Content-Type": "application/json" },
-      body: JSON.stringify({teamName, leaderName, teamMembers, email, college, phonenum}),
-    });
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(registrationData),
+    }); 
 
     const data = await response.json();
-    document.getElementById("responseMessage").textContent = data.message;
-    document.getElementById("responseMessage").style.color = response.ok ? "green" : "red";
+
+    responseMessageElement.textContent = data.message;
+    responseMessageElement.style.color = response.ok ? "green" : "red";
+
+    if(response.ok) {
+      document.getElementById("registrationForm").reset();
+    }
   }
-    catch (error) {
-    document.getElementById("responseMessage").textContent = "Error connecting to server!";
-    document.getElementById("responseMessage").style.color = "red";
+
+  catch (error) {
+    console.error("Error:", error); 
+    responseMessageElement.textContent = "Error: Could not connect to the server.";
+    responseMessageElement.style.color = "red";
   }
-  
+
+});
+
+
+
+let map;
+
+    async function initMap() {
+
+        const location = { lat: 17.8691423, lng: 83.2956262 }; //NSRIT CSE Block
+
+        const { Map } = await google.maps.importLibrary("maps");
+
+        // The map, centered at the specified location
+        map = new Map(document.getElementById("map"), {
+            zoom: 16,
+            center: location,
+        });
+
+        // Add a marker for the location
+        new google.maps.Marker({
+            position: location,
+            map: map,
+            title: "New York City"
+        });
+    }
+
+    // Get the button element by its ID
+const backToTopButton = document.getElementById("back-to-top-btn");
+
+// Show the button when the user scrolls down 200px from the top
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+  // Check both documentElement and body for cross-browser compatibility
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document smoothly
+backToTopButton.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 });

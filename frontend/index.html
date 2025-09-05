@@ -12,14 +12,14 @@
 
     <header class="main-header">
         <div class="container">
-            <a href="#" class="logo">HackWithVizag</a>
+            <a href="#" class="logo">HackWithVizag 3.0</a>
             <nav class="main-nav">
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#schedule">Schedule</a></li>
                     <li><a href="#prizes">Prizes</a></li>
-                    <li><a href="#sponsors">Sponsors</a></li>
                     <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -28,93 +28,298 @@
     <section class="hero">
         <div class="hero-content">
            <div class="heading">
+             <h3 class="h-3">Build. Innovate. Disrupt</h3>
              <h1 class="h-1">Hack With Vizag 3.0</h1>
-            <h3 class="h-3">Build. Innovate. Disrupt</h3>
            </div>
             <p class="p-1" id="typing-text"></p>
         </div>
-        <!-- <div class="register-button">
-            <a href="google form" >Register Now</a>
-        </div> -->
-        <a href="Google Form" class="register-btn">Register Now</a>
+
+        <a href="#register" class="register-btn">Register Now</a>
 
     </section>
+
+    <div id="countdown">
+        <h3>Event starts in</h3>
+        <div class="timer">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <p>Days</p>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <p>Hours</p>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <p>Minutes</p>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <p>Seconds</p>
+            </div>
+        </div>
+    </div>
     
-    <section class="about">
+    <section class="about" id="about">
         <h2 class="h-2">What is this Hackathon About?</h2>
         <p>
             This hackathon is a high-energy, collaborative event where students and 
             innovators come together to solve real-world problems through technology. 
-            Over the course of [X] hours, participants will brainstorm, build, and pitch 
+            Over the course of 36 hours, participants will brainstorm, build, and pitch 
             their projects — ranging from web and mobile applications to AI and IoT solutions. 
             It’s not just about coding; it’s about creativity, teamwork, and turning bold ideas 
             into working prototypes.
         </p>
     </section>
 
+    
     <section class="details">
         <h2>Event Details</h2>
-        <ul>
-            <li><strong>Date : </strong> 26th - 27th September 2025</li><br>
-            <li><strong>Venue : </strong>NSRIT Campus</li><br>
-            <li><strong>Eligibility : </strong>B.tech Students</li>
-        </ul>
-
+        <div class="event-details">
+            <div class="date">
+                <img src="../assets/date.png" alt="">
+                <p class="date1"><strong>Date : </strong><br> 26th - 27th Sep 2025</p>
+            </div>
+            <div class="venue">
+                <img src="../assets/venue.png" alt="">
+                <p class="venue1"><strong>Venue : </strong><br>NSRIT Campus</p>
+            </div>
+            <div class="eligibility">
+                <img src="../assets/eligibility.png" alt="">
+                <p class="eligibility1"><strong>Eligibility : </strong><br>B.tech Students</p>
+            </div>
+        </div>    
     </section>
 
     <section class="why-join">
         <h2>Why Join?</h2>
-        <ul>
-            <p id="typing-text-1"><strong>Networking:</strong></p>
-            <p id="typing-text-2"><strong>Skill Development:</strong></p>
-            <p id="typing-text-3"><strong>Prizes & Recognition:</strong></p>
-            <p id="typing-text-4"><strong>Fun & Learning:</strong></p>
-        </ul>
+            <p id="typing-text-1"><strong>Networking:</strong>Connect with like-minded peers, mentors, and industry experts.</p>
+            <p id="typing-text-2"><strong>Skill Development:</strong>Enhance your coding, problem-solving, and teamwork skills.</p>
+            <p id="typing-text-3"><strong>Prizes & Recognition:</strong>Win exciting prizes and gain recognition for your innovative solutions.</p>
     </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule">
+        <div class="container">
+            <h2>Event Schedule</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Opening Ceremony</h3>
+                        <div class="time">Day 1 - 09:00 AM</div>
+                        <p>Kick-off, keynote speech, and theme announcements.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Hacking Begins!</h3>
+                        <div class="time">Day 1 - 11:00 AM</div>
+                        <p>Let the coding commence! Mentors will be available.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Tech Workshop</h3>
+                        <div class="time">Day 1 - 03:00 PM</div>
+                        <p>Workshop on "Intro to APIs" by our sponsor.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Project Submission Deadline</h3>
+                        <div class="time">Day 2 - 11:00 AM</div>
+                        <p>Finalize your projects and submit them for judging.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Project Demos & Judging</h3>
+                        <div class="time">Day 2 - 01:00 PM</div>
+                        <p>Teams present their innovative solutions to the judges.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Closing Ceremony & Awards</h3>
+                        <div class="time">Day 2 - 05:00 PM</div>
+                        <p>Announcement of winners and closing remarks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="prizes">
+        <h2>Prizes</h2>
+        <div class="prize-details">
+            <div class="first-prize">
+                <img src="../assets/1st-prize.png" alt="">
+                <p class="first-prize1"><strong>1st Prize</strong></p>
+                <p> </p>
+            </div>
+            <div class="second-prize">
+                <img src="../assets/2nd-place.png" alt="">
+                <p class="second-prize1"><strong>2nd Prize</strong></p>
+            </div>
+            <div class="third-prize">
+                <img src="../assets/3rd-place.png" alt="">
+                <p class="third-prize1"><strong>3rd Prize</strong></p>
+            </div>
+        </div>    
+    </section>
+
 
     <div class="themes-section">
         <section class="themes">
             <h2>Themes</h2>
-            <div class="theme1">
-                <h3>Theme 1: Smart City Solutions</h3>
-                <p>Develop applications that enhance urban living, such as smart traffic management, waste management, or public safety solutions.</p>
+            <div class="theme-list">
+                <div class="theme-card">
+                    <h3>Future of Web</h3>
+                    <img src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" alt="Web Development Theme" class="theme-image">
+                    <div class="theme-overlay">
+                        <p>Build innovative web applications that solve real-world problems using modern frameworks and technologies.</p>
+                    </div>
+                </div>
+                <div class="theme-card">
+                    <h3>AI for Good</h3>
+                    <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" alt="AI Theme" class="theme-image">
+                    <div class="theme-overlay">
+                        <p>Leverage the power of Artificial Intelligence and Machine Learning to create solutions for social and environmental challenges.</p>
+                    </div>
+                </div>
+
+                <div class="theme-card">
+                     <h3>Cyber Security</h3>
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" alt="Cybersecurity Theme" class="theme-image">
+                    <div class="theme-overlay">
+                        <p>Develop tools and platforms to protect digital assets, ensure privacy, and combat cyber threats in an interconnected world.</p>
+                    </div>
+                </div>
+                <div class="theme-card">
+                    <img src="" alt="">
+                    <h3>Theme Name</h3>
+                    <p>Description</p>
+                </div>
+                <div class="theme-card">
+                    <img src="" alt="">
+                    <h3>Theme Name</h3>
+                    <p>Description</p>
+                </div>
+                <div class="theme-card">
+                    <img src="" alt="">
+                    <h3>Theme Name</h3>
+                    <p>Description</p>
+                </div>
+                <div class="theme-card">
+                    <img src="" alt="">
+                    <h3>Theme Name</h3>
+                    <p>Description</p>
+                </div>
             </div>
         </section>
     </div>
+ 
+ 
 
+    <div class="registration-container" id="register">
+        <h2>Registration Form</h2>
 
-    <div class="form-container">
-        <form class="registration" id="registrationForm">
-        <h1>Register Here !</h1>
-            <div class="registration-form">
-                <input type="text" id="teamName" placeholder="Team Name" required>
-                <input type="text" id="leaderName" placeholder=" Team Leader's Name">
-                <input type="text" id="member1" placeholder="Member 1">
-                <input type="text" id="member2" placeholder="Member 2">
-                <input type="text" id="member3" placeholder="Member 3">
-                <input type="email" id="email" placeholder="Team Leader's Email" required>
-                <input type="text" id="college" placeholder="College Name" required>
-                <input type="text" id="phonenum" placeholder="Team Leader's Phone Number" required>
-                <button type="submit" class="registration-button">Submit</button>
+        <form id="registrationForm">
+            <div class="form-section">
+                <h3>Team Details</h3>
+                <label for="team-name">Team Name:</label>
+                <input type="text" id="team-name" name="team-name" required>
+
+                <label for="college-name">College Name:</label>
+                <input type="text" id="college-name" name="college-name" required>
             </div>
+
+            <div class="form-section">
+                <h3>Team Leader Details</h3>
+                <label for="leader-name">Team Leader Name</label>
+                <input type="text" id="leader-name" name="leader-name" required>
+
+                <label for="leader-roll">Team Leader Roll No</label>
+                <input type="text" id="leader-roll" name="leader-roll" required>
+
+                <label for="leader-mail">Team Leader Email</label>
+                <input type="email" id="leader-mail" name="leader-mail" required>
+
+                <label for="leader-phone">Team Leader Phone Number</label>
+                <input type="tel" id="leader-phone" name="leader-phone" required>
+            </div>
+
+            <div class="form-section">
+                <h3>Team Members</h3>
+                <label for="member2-name">Member 2</label>
+                <input type="text" id="member2-name" name="member2-name" placeholder="Name" required>
+                <input type="text" id="member2-roll" name="member2-roll" placeholder="Roll No" required>
+                
+                <label for="member3-name">Member 3</label>
+                <input type="text" id="member3-name" name="member3-name" placeholder="Name" required>
+                <input type="text" id="member3-roll" name="member3-roll" placeholder="Roll No" required>
+
+                <label for="member4-name">Member 4</label>
+                <input type="text" id="member4-name" name="member4-name" placeholder="Name">
+                <input type="text" id="member4-roll" name="member4-roll" placeholder="Roll No">
+            </div>
+
+            <button type="submit" class="submit-btn">Register</button>
+            
         </form>
 
         <p id="responseMessage"></p>
     </div>
 
-    <section class="contact">
-        <h2>Contact Us</h2>
-        <p>For any queries, reach out to us at: <a href="mailto:23nu1a0517@nsrit.edu.in">Mail us</a></p>
+    <section class="contact-section" id="contact">
+  <h2>Contact Us</h2>
+
+  <!-- Official Email -->
+  <div class="contact-email">
+    <p><strong>📧 Email:</strong> 
+      <a href="mailto:hackwithvizag@gmail.com">hackwithvizag@gmail.com</a>
+    </p>
+  </div>
+
+  <div class="contact-cards">
+
+    <!-- Faculty Coordinator -->
+    <div class="contact-card">
+      <h3>👨‍🏫 Faculty Coordinator</h3>
+      <p><strong>Name:</strong> Prof. Dr.V.Sreerama Murthy</p>
+      <p><strong>📞 Phone:</strong> 
+        <a href="tel:+919701254792">+91 97012 54792</a>
+      </p>
+    </div>
+
+    <!-- Student Coordinators -->
+    <div class="contact-card">
+      <h3>👩‍🎓 Student Coordinators</h3>
+      <p><strong>Name:</strong> M.Sai Saketh</p>
+      <p><strong>📞 Phone:</strong> 
+        <a href="tel:+917981283915">+91 79812 83915</a>
+      </p>
+      <hr>
+      <p><strong>Name:</strong> Rohit Verma</p>
+      <p><strong>📞 Phone:</strong> 
+        <a href="tel:+919123456789">+91 91234 56789</a>
+      </p>
+    </div>
+
+  </div>
     </section>
 
+    <section class="maps">
+        <h1>College Location</h1>
+        <div id="map"></div>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCI7m1PU7bZXqS-QJ61xQFHsTy0Agp0vOY&callback=initMap"></script>
+    </section>
+    
     <footer>
         <p>&copy; 2025 Hack With Vizag. All rights reserved.</p>
     </footer>
 
-
-
-
-
+    <a id="back-to-top-btn" title="Go to top">↑</a>
 
     <script src="app.js"></script>
 </body>
