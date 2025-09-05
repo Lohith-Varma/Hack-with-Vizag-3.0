@@ -12,6 +12,7 @@ body{
                 rgba(255, 255, 255, 0.75),
                 rgba(0, 0, 0, 0.5)
                 ),
+                /* url(../assets/nsrit.jpg); */
                 url("../assets/background-image.jpg");
 
     background-size: cover;
@@ -26,21 +27,26 @@ body{
     position: sticky;   /* makes it stick */
     top: 0;             /* stick at top */
     z-index: 1000;      /* stay above other content */
-    background: #007ea7;   /* add background so text doesn’t overlap */
+    /* background: #007ea7;   add background so text doesn’t overlap */
     padding: 10px 0;    /* space inside header */
-    top: 0;
-    left: 0;
+    /* top: 0;
+    left: 0; */
+    height: 180px;
     width: 100%;
     margin: 0;
     border: none;
+    background: url(../assets/nsrit.jpg);
+    background-size: 100% 120%;
+    background-repeat: no-repeat;
+    /* background-position: center; */
 }
 
 .main-header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;         /* keep it neat */
-    margin: 0 auto;     /* center container */
+    width: 90%;
+    margin: 0 auto;
 }
 
 .logo {
@@ -75,7 +81,7 @@ body{
     justify-content: center;
     align-items: center;
     margin-bottom: 48px;
-    margin-top: 200px;
+    margin-top: 60px;
 }
 
 .heading{
@@ -111,15 +117,26 @@ body{
 
 #countdown {
     display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    color: #000;
+    gap: 1rem;
     border: 1px solid #003459;
     background-color: #f7f9f9;
     border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 520px;
     margin: auto;
-    margin-bottom: 10rem;
+    margin-bottom: 50px;
+}
+
+.timer {
+    display: flex;
+    gap: 1rem;
 }
 
 .countdown-item {
@@ -127,6 +144,11 @@ body{
     padding: 1rem 1.5rem;
     border-radius: 8px;
     border: 1px solid rgba(12, 0, 40, 0.1);
+}
+
+.countdown-item:hover {
+    scale: 1.05;
+    box-shadow: 0 0 25px rgba(40, 60, 120, 0.5);
 }
 
 .countdown-item span {
@@ -159,24 +181,20 @@ body{
 .register-btn:hover{
     scale: 1.05;
     background-color: #007ea7;
-    /* box-shadow: 0 0 1px rgba(0,123,255,0.5); */
+    box-shadow: 0 0 18px rgba(0,123,255,0.5);
 }
 
 
 .about{
+    text-align: center;
     max-width: 1200px;
     margin: 0 auto;
-    /* margin-bottom: 48; */
     border: 1px solid #eee;
-    margin: 0 auto;
     padding: 18px 26px;
     border-radius: 14px;
     font-size: 18px;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
     background-color: #00798C;
+    margin-top: 120px;
     margin-bottom: 44px;
 }
 
@@ -198,12 +216,12 @@ body{
 .details{
     /* display: flex; */
     color: #000;
-    width: 1080px;
+    width: 960px;
     border: 3px solid rgba(49, 104, 123, 0.407);
     margin: 12px auto;
     /* padding: 18px 50px; */
     border-radius: 12px;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     /* line-height: 1.8px; */
     font-size: 24px;
     text-align: center;
@@ -216,39 +234,51 @@ body{
 }
 
 .date {
-    width: 250px;
+    width: 200px;
     color: #000;
     margin: 12px auto;
-    border: 3px solid rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
     border-radius: 12px;
     justify-content: space-around;
     font-size: 16px;
 }
 
 .date img {
-    scale: 1.5;
+    padding-top: 10px;
+    height: 60px;
+    width: auto;
 }
 
-
-
 .venue {
-    width: 250px;
+    width: 200px;
     color: #000;
     margin: 12px auto;
-    border: 3px solid rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
     border-radius: 12px;
     justify-content: space-around;
     font-size: 16px;
+}
+
+.venue img {
+    padding-top: 10px;
+    height: 60px;
+    width: auto;
 }
 
 .eligibility {
-    width: 250px;
+    width: 200px;
     color: #000;
     margin: 12px auto;
-    border: 3px solid rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
     border-radius: 12px;
     justify-content: space-around;
     font-size: 16px;
+}
+
+.eligibility img {
+    padding-top: 10px;
+    height: 60px;
+    width: auto;
 }
 
 .why-join{
@@ -360,6 +390,7 @@ body{
     margin: 12px auto;
     margin-top: 120px;
     border-radius: 12px;
+    color: #000;
     justify-content: space-around;
     font-size: 24px;
     text-align: center;
@@ -374,35 +405,49 @@ body{
 .first-prize {
     width: 250px;
     margin: 12px auto;
-    border: 3px solid white;
+    border: 3px solid rgb(0, 0, 0);
     border-radius: 12px;
     justify-content: space-around;
     font-size: 16px;
 }
 
 .first-prize img {
-    scale: 1.5;
+    height: 50px;
+    width: auto;
 }
 
 .second-prize {
     width: 250px;
     margin: 12px auto;
-    border: 3px solid white;
+    border: 3px solid rgb(0, 0, 0);
     border-radius: 12px;
     justify-content: space-around;
     font-size: 16px;
+}
+
+.second-prize img {
+    height: 50px;
+    width: auto;
 }
 
 .third-prize {
     width: 250px;
     margin: 12px auto;
-    border: 3px solid white;
+    border: 3px solid rgb(0, 0, 0);
     border-radius: 12px;
     justify-content: space-around;
     font-size: 16px;
 }
 
+.third-prize img {
+    height: 50px;
+    width: auto;
+}
+
 .themes-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 50px auto;
     margin-top: 100px;
     width: 1000px;
@@ -423,83 +468,74 @@ body{
 }
 
 .theme-list {
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
+    /* display:grid;
+    grid-template-columns: repeat(3,1fr); */
     /* align-items: center; */
+    display: flex;
+    gap: 20px 50px;
     margin: 0 auto;
-    /* justify-content: center; */
-    gap:20px;
+    justify-content: center;
     /* justify-content: space-between; */
     max-width: 800px;
+    flex-wrap: wrap;
+
 }
 
-.theme1 {
+
+.theme-card {
     /* margin: auto; */
     text-align: center;
     display: flex;
     flex-direction: column;
-    width: 150px;
+    width: 180px;
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
     border: 2px solid black;
     padding: 20px;
     border-radius: 10px;
 }
 
-.theme2 {
+.theme-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block  ;
+}
+
+.theme-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(220, 237, 255, 0.95);
+    color: #1a2a4c;
+
     display: flex;
     flex-direction: column;
-    width: 150px;
-    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     padding: 20px;
-    border-radius: 10px;
+
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
-.theme3 {
-    display: flex;
-    flex-direction: column;
-    width: 150px;
-    border: 2px solid black;
-    padding: 20px;
-    border-radius: 10px;
+.theme-card:hover .theme-overlay {
+    opacity: 1;
 }
 
-.theme4 {
-    display: flex;
-    flex-direction: column;
-    width: 150px;
-    border: 2px solid black;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.theme5 {
-    display: flex;
-    flex-direction: column;
-    width: 150px;
-    border: 2px solid black;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.theme6 {
-    display: flex;
-    flex-direction: column;
-    width: 150px;
-    border: 2px solid black;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.theme7 {
-    display: flex;
-    flex-direction: column;
-    width: 150px;
-    border: 2px solid black;
-    padding: 20px;
-    border-radius: 10px;
+.theme-card:hover {
+    transform: scale(1.05,1.05);
+    box-shadow: rgb(255, 0, 0);
 }
 
 
-.form-container {
+/* .form-container {
     margin: auto;
     margin-top: 100px;
     width: 500px;
@@ -548,7 +584,7 @@ body{
     padding:  12px 56px;
     background-color: #007BFF;
     color: white;
-    /* border: 1px solid black; */
+    border: 1px solid black;
     border-radius: 8px;
     transition: background-color 0.3s ease;
 }
@@ -558,11 +594,98 @@ body{
     box-shadow: 0 0 2px rgba(0,123,255,0.5);    
     cursor: pointer;
 
+} */
+
+
+.registration-container {
+    max-width: 520px;
+    margin: auto;
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    background-color: #88A0A8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.registration-container h2 {
+    text-align: center;
+    color: #000;
+}
+
+.form-section {
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* flex: 1 1 350px; */
+    background: #fff;
+    padding: 10px 12px;
+    margin: auto;
+    margin-bottom: 15px;
+    width: 380px;
+    border-radius: 8px;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+.form-section h3 {
+    margin-top: 0;
+    color: #555;
+}
+
+.form-section label {
+    display: block;
+    margin-bottom: 1px;
+    font-weight: bold;
+}
+
+.form-section input {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    /* box-sizing: border-box; To ensure padding doesn't affect the width */
+}
+
+/* .submit-btn {
+
+    width: 200px;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 18px;
+    background-color: #1495da;
+    color: #121212;
+    text-decoration: none;
+    text-align: center;
+    padding: 18px;
+}
+
+.submit-btn:hover {
+    scale: 1.05;
+    background-color: #00bfff;
+    cursor: pointer;
+} */
+
+.submit-btn {
+    display: block;
+    margin: auto;
+    width: 200px;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.submit-btn:hover {
+    background-color: #0056b3;
 }
 
 .contact-section {
-  max-width: 480px;  /* smaller width than before */
-  margin: 50px auto; /* reduced margin */
+  max-width: 480px;
+  margin: 50px auto;
   padding: 12px;
   background: #474d4fbb;
   border-radius: 10px;
@@ -629,7 +752,63 @@ body{
   text-decoration: underline;
 }
 
- 
+.maps {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    color: #fff;
+    background-color: #005f73;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    margin: auto;
+    width: 640px;
+}
+
+#map {
+    border: 1px solid #000;
+    height: 400px;  /* The height is required for the map to show */
+    width: 640px;    /* You can adjust the width as needed */
+    border-radius: 10px;
+}
+
+#back-to-top-btn {
+  /* Initially hidden */
+  opacity: 0;
+  visibility: hidden;
+
+  /* Positioning */
+  position: fixed; /* Stays in the same place even when you scroll */
+  bottom: 20px;
+  right: 30px;
+  z-index: 99; /* Sits on top of other content */
+  
+  /* Styling */
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  background-color: #0f0f0f; /* A nice blue color */
+  color: white;
+  cursor: pointer;
+  padding: 8px 16px; /* Adjust padding to make it look right */
+  border-radius: 50%; /* Makes it a circle */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  
+  /* Smooth transition for fading in/out */
+  transition: opacity 0.4s, visibility 0.4s;
+}
+
+#back-to-top-btn.show {
+  /* Class to make it visible */
+  opacity: 1;
+  visibility: visible;
+}
+
+#back-to-top-btn:hover {
+  background-color: #0056b3; /* A darker blue on hover */
+}
 
 footer {
     text-align: center;
