@@ -109,7 +109,7 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
     responseMessageElement.textContent = "Submitting...";
     responseMessageElement.style.color = "orange";
 
-    const response = await fetch("http://localhost:5000/register", {
+    const response = await fetch("https://hackwithvizag-backend.onrender.com/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(registrationData),
