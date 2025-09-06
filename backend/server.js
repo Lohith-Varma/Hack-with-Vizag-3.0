@@ -7,16 +7,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const rateLimit = require('express-rate-limit');
-
-const limiter = rateLimit({
+const registrationLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 10, // Limit each IP to 10 requests per windowMs
     standardHeaders: true,
     legacyHeaders: false,
     message: 'Too many registration attempts from this IP, please try again after 15 minutes',
 });
-app.use('/register', limiter);
+app.use('/register', registrationLimiter);
 
 // --- CONNECTING TO MONGODB ---
 const MONGO_URI = "mongodb+srv://siddu_0426:lohith2006@hackathoncluster.k1xp9kp.mongodb.net/hackathon?retryWrites=true&w=majority&appName=HackathonCluster";
