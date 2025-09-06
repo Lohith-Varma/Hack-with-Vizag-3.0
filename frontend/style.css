@@ -62,24 +62,24 @@
   
   /* Apply the animation defined above */
   animation-name: slideUpFadeIn;
-  animation-duration: 0.6s;    /* How long each letter's animation takes */
+  animation-duration: 0.3s;    /* How long each letter's animation takes */
   animation-fill-mode: forwards; /* IMPORTANT: Makes the style stay at the "to" state (visible) when done */
 }
 
 .logo-title span:nth-child(1) { /* N */
-  animation-delay: 0.25s;
-}
-.logo-title span:nth-child(2) { /* S */
   animation-delay: 0.35s;
 }
-.logo-title span:nth-child(3) { /* R */
+.logo-title span:nth-child(2) { /* S */
   animation-delay: 0.45s;
 }
-.logo-title span:nth-child(4) { /* I */
+.logo-title span:nth-child(3) { /* R */
   animation-delay: 0.55s;
 }
-.logo-title span:nth-child(5) { /* T */
+.logo-title span:nth-child(4) { /* I */
   animation-delay: 0.65s;
+}
+.logo-title span:nth-child(5) { /* T */
+  animation-delay: 0.75s;
 }
 
 
@@ -1013,3 +1013,4 @@ nav ul li a:hover {
     }
 
 
+    
