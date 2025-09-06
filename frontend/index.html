@@ -11,10 +11,14 @@
 <body>
 
     <header> 
+        <div class="main-head">
     <!-- Logo + Hackathon Name -->
         <div class="logo-section">
-            <img src="assets/NSRIT Logo.jpg" alt="College Logo">
-            <span>Hack With Vizag 3.0</span>
+            <span>HackWithVizag3.0</span>
+            <div class="head-img">
+                <img src="assets/NSRIT Logo.jpg" alt="College Logo">
+            </div>
+            
             <!-- Menu button for small screens -->
             <button class="menu-toggle" id="menu-toggle">&#9776;</button>
         </div>
@@ -31,13 +35,20 @@
             <li><a href="#register" class="register-button">Register</a></li>
             </ul>
         </nav>
+        </div>
     </header>
-
 
     <section class="hero">
         <div class="hero-content">
             <div class="college-logo">
-                <img src="assets/NSRIT Logo.jpg" alt="">
+                <div class="logo-title">
+                    <span>N</span>
+                    <span>S</span>
+                    <span>R</span>
+                    <span>I</span>
+                    <span>T</span>
+                </div>
+                <!-- <img src="assets/NSRIT Logo.jpg" alt=""> -->
                 <p>Presents</p>
             </div>
 
@@ -104,15 +115,6 @@
     </div>
   </div>
 </section>
-
-
-<section class="why-join" id="why-join">
-  <h2>Why Join?</h2>
-  <p><strong>Networking:</strong> Connect with like-minded peers, mentors, and industry experts.</p>
-  <p><strong>Skill Development:</strong> Enhance your coding, problem-solving, and teamwork skills.</p>
-  <p><strong>Prizes & Recognition:</strong> Win exciting prizes and gain recognition for your innovative solutions.</p>
-</section>
-
 
     <!-- Schedule Section -->
     <section class="schedule" id="schedule">
@@ -253,26 +255,26 @@
         <div class="form-section">
             <h3>Team Details</h3>
             <label for="team-name">Team Name:</label>
-            <input type="text" id="team-name" name="team-name" placeholder="Team Name" required>
+            <input type="text" id="teamName" name="team-name" placeholder="Team Name" required>
 
             <label for="college-name">College Name:</label>
-            <input type="text" id="college-name" name="college-name" placeholder="College Name" required>
+            <input type="text" id="collegeName" name="college-name" placeholder="College Name" required>
         </div>
 
         <!-- Team Leader Details -->
         <div class="form-section">
             <h3>Team Leader Details</h3>
             <label for="leader-name">Team Leader Name</label>
-            <input type="text" id="leader-name" name="leader-name" placeholder="Team Leader Name" required>
+            <input type="text" id="leaderName" name="leader-name" placeholder="Team Leader Name" required>
 
             <label for="leader-roll">Team Leader Roll No</label>
-            <input type="text" id="leader-roll" name="leader-roll" placeholder="Team Leader Roll No" required>
+            <input type="text" id="leaderRoll" name="leader-roll" placeholder="Team Leader Roll No" required>
 
             <label for="leader-mail">Team Leader Email</label>
-            <input type="email" id="leader-mail" name="leader-mail" placeholder="Team Leader Email" required>
+            <input type="email" id="leaderMail" name="leader-mail" placeholder="Team Leader Email" required>
 
             <label for="leader-phone">Team Leader Phone Number</label>
-            <input type="tel" id="leader-phone" name="leader-phone" placeholder="Team Leader Phone No:" required>
+            <input type="tel" id="leaderPhone" name="leader-phone" placeholder="Team Leader Phone No:" required>
         </div>
 
         <!-- Team Members -->
@@ -280,19 +282,22 @@
             <h3>Team Members</h3>
 
             <label for="member2-name">Member 2</label>
-            <input type="text" id="member2-name" name="member2-name" placeholder="Name" required>
-            <input type="text" id="member2-roll" name="member2-roll" placeholder="Roll No" required>
+            <input type="text" id="member2Name" name="member2-name" placeholder="Name" required>
+            <input type="text" id="member2Roll" name="member2-roll" placeholder="Roll No" required>
 
             <label for="member3-name">Member 3</label>
-            <input type="text" id="member3-name" name="member3-name" placeholder="Name" required>
-            <input type="text" id="member3-roll" name="member3-roll" placeholder="Roll No" required>
+            <input type="text" id="member3Name" name="member3-name" placeholder="Name" required>
+            <input type="text" id="member3Roll" name="member3-roll" placeholder="Roll No" required>
 
             <label for="member4-name">Member 4</label>
-            <input type="text" id="member4-name" name="member4-name" placeholder="Name">
-            <input type="text" id="member4-roll" name="member4-roll" placeholder="Roll No">
+            <input type="text" id="member4Name" name="member4-name" placeholder="Name">
+            <input type="text" id="member4Roll" name="member4-roll" placeholder="Roll No">
         </div>
 
         <button type="submit" class="submit-btn">Register</button>
+
+        <div id="responseMessage" class="response-message"></div>
+    
     </form>
 </div>
 
@@ -408,7 +413,6 @@
         </div>            
         </form>
 
-        <p id="responseMessage"></p>
     </div>
 
     <section class="contact-section" id="contact">
