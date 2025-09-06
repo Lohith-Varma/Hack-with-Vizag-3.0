@@ -2,18 +2,9 @@
         font-family: sans-serif;
         box-sizing: border-box;
         margin: 0;
-        color: #ffffff;
+        color: #000000;
 
-        /* Gradient overlay + background image */
-        background: linear-gradient(
-            rgba(0, 0, 0, 0),
-            rgba(0, 0, 0, 0.8),
-            rgba(0, 0, 0, 0.95),
-            rgba(0, 0, 0, 0.8),
-            rgba(0, 0, 0, 0)
-            ),
-            url(../assets/hackathon-hero.jpg);
-
+        background-color: #ffffff;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -25,11 +16,11 @@
     header {
   position: sticky;
   top: 0;
-  background: linear-gradient(90deg, #2c5364, #203a43, #2c5364);
+  background: linear-gradient(90deg, #000000, #2b4750, #9dbfcd);
   padding: 15px 50px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
   z-index: 1000;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
@@ -38,15 +29,76 @@
 .logo-section {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   width: 100%;
+
 }
 
-.logo-section img {
+@keyframes slideUpFadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+}
+
+.logo-title {
+  display: flex; /* Helps align the letters */
+  font-size: 9rem;  /* Use your original font size */
+  font-weight: 700;
+  color: #000;
+  letter-spacing: 1px;
+}
+
+.logo-title span {
+  display: inline-block; /* Required for transforms to work */
+  opacity: 0;           /* Start fully invisible */
+  
+  /* Apply the animation defined above */
+  animation-name: slideUpFadeIn;
+  animation-duration: 0.6s;    /* How long each letter's animation takes */
+  animation-fill-mode: forwards; /* IMPORTANT: Makes the style stay at the "to" state (visible) when done */
+}
+
+.logo-title span:nth-child(1) { /* N */
+  animation-delay: 0.25s;
+}
+.logo-title span:nth-child(2) { /* S */
+  animation-delay: 0.35s;
+}
+.logo-title span:nth-child(3) { /* R */
+  animation-delay: 0.45s;
+}
+.logo-title span:nth-child(4) { /* I */
+  animation-delay: 0.55s;
+}
+.logo-title span:nth-child(5) { /* T */
+  animation-delay: 0.65s;
+}
+
+
+/* .logo-section img {
   height: 55px;
   width: auto;
+  /* margin: auto; */
   /* width: 45px; */
-  object-fit: contain;
+  /* object-fit: contain;  
+} */
+.logo-section .head-img img{
+  margin: auto;
+  width: 180px;
+  height: auto;
+  display: block;
+} 
+.head-img img{
+  margin: auto;
+  display: block;
 }
 
 .logo-section span {
@@ -54,6 +106,12 @@
   font-weight: 700;
   color: white;
   letter-spacing: 1px;
+}
+.main-head{
+  display: flex;
+  align-items: center;
+  /* justify-content:space-around; */
+  gap: 420px;
 }
 
 /* Menu toggle button */
@@ -68,8 +126,12 @@
 }
 
 /* Nav links */
-nav {
+#navbar {
+  display: flex;
   margin-left: auto;
+  align-items: center;
+  justify-content: center;
+
 }
 
 nav ul {
@@ -94,10 +156,10 @@ nav ul li a:hover {
 
 /* Register button */
 .register-button {
-  display: inline-block;
+  /* display: inline-block; */
   padding: 8px 18px;
-  background: #4fc3f7;
-  color: #0f2027;
+  background: #2c27278e;
+  color: #ffffff;
   font-weight: 600;
   border-radius: 6px;
   transition: 0.3s;
@@ -119,19 +181,24 @@ nav ul li a:hover {
   text-align: center;
 }
 
-.college-logo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+  .college-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    color: #000;
+  }
+
+
+
+.college-name{
+  /* font-family:Arial, Helvetica, sans-serif; */
+  font: 700;
+  font-size: 150px;
+  padding: 12px 10px;
 }
 
-.college-logo img {
-  width: 180px; /* fixed for consistency */
-  max-width: 100%;
-  height: auto;
-}
 
 .heading {
   display: flex;
@@ -145,7 +212,7 @@ nav ul li a:hover {
   font-weight: bolder;
   font-family: serif;
   margin: 12px 0;
-  color: #ffffff;
+  color: #000000;
 }
 
 .h-3 {
@@ -157,7 +224,7 @@ nav ul li a:hover {
 .p-1 {
   font-size: 24px;
   margin-top: 14px;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(40, 40, 40, 0.95);
 }
 
 
@@ -310,35 +377,7 @@ nav ul li a:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.why-join {
-  color: #ffffff;
-  max-width: 1200px; /* ✅ responsive instead of fixed width */
-  border: 1px solid #000000;
-  margin: 40px auto;
-  padding: 20px 26px;
-  border-radius: 12px;
-  text-align: center;
-  line-height: 1.8;
-  font-size: 22px;
-  background-color: #546A76;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.why-join h2 {
-  font-size: 34px;
-  margin-bottom: 16px;
-}
-
-.why-join p {
-  margin: 12px 0;
-}
-
-.why-join:hover {
-  transform: scale(1.01);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-}
-
-    .schedule {
+ .schedule {
   background-image: linear-gradient(45deg, #000428, #004e92);
   box-shadow: 0 10px 30px rgba(0, 78, 146, 0.2);
   max-width: 900px; /* ✅ responsive */
@@ -693,6 +732,13 @@ nav ul li a:hover {
     background-color: #0056b3;
 }
 
+.response-message{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    min-height: 25px;
+}
+
     .faq-container {
         background-color: #0c0c1e;
         color: #ffffff;
@@ -965,408 +1011,5 @@ nav ul li a:hover {
         height: 40px;
         width: auto;
     }
-/* } */
 
-/* Tablets (below 991px) */
-@media (max-width: 991px) {
-  body {
-    background-attachment: scroll; /* prevents jitter on mobile */
-    background-position: top;
-  }
 
-  header {
-    padding: 15px 20px;
-  }
-
-  .logo-section span {
-    font-size: 1.2rem;
-  }
-
-  nav ul {
-    gap: 15px;
-  }
-
-  nav ul li a {
-    font-size: 0.95rem;
-  }
-
-  .h-1 {
-    font-size: 48px;
-  }
-
-  .h-3 {
-    font-size: 20px;
-  }
-
-  .p-1 {
-    font-size: 20px;
-  }
-
-  .college-logo img {
-    width: 140px;
-  }
-
-  #countdown {
-    width: 80%;
-    padding: 15px;
-  }
-
-  .countdown-item {
-    padding: 0.8rem 1rem; /* reduced */
-  }
-
-  .countdown-item span {
-    font-size: 2rem;
-  }
-
-  .countdown-item p {
-    font-size: 0.85rem;
-  }
-
-  .about {
-    margin-top: 80px;
-    padding: 16px 20px;
-    font-size: 16px;
-  }
-
-  .h-2 {
-    font-size: 22px;
-  }
-
-    .details {
-    font-size: 20px;
-    padding: 16px;
-  }
-
-  .detail-card {
-    width: 180px;
-    font-size: 15px;
-  }
-
-  .why-join {
-    font-size: 20px;
-    padding: 16px 20px;
-  }
-
-  .why-join h2 {
-    font-size: 30px;
-  }
-  
-      .themes-section {
-        max-width: 90%;
-        padding: 15px;
-    }
-
-    .theme-list {
-        gap: 20px;
-    }
-
-    .theme-card {
-        width: 170px;
-        height: 170px;
-        font-size: 15px;
-    }
-
-    .themes h2 {
-        font-size: 24px;
-    }
-
-    .registration-container {
-        padding: 15px 20px;
-    }
-
-    .form-section {
-        padding: 10px 12px;
-    }
-
-    .submit-btn {
-        width: 180px;
-    }
-
-
-    .contact-section {
-        padding: 12px;
-        max-width: 90%;
-    }
-
-    .contact-card {
-        flex: 1 1 45%; /* two cards side by side if space allows */
-        padding: 10px 12px;
-    }
-
-    .contact-section h2 {
-        font-size: 1.8rem;
-    }
-
-
-        .maps {
-        padding: 15px;
-    }
-
-    .maps h1 {
-        font-size: 1.8rem;
-    }
-
-
-
-}
-
-/* Mobiles (below 767px) */
-@media (max-width: 768px) {
-
-    body {
-    background: linear-gradient(
-        rgba(0, 0, 0, 0.6),
-        rgba(0, 0, 0, 0.9)
-      ),
-      url(../assets/hackathon-hero.jpg);
-
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-    }    
-    header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px 15px;
-    }
-
-    /* Show menu button */
-    .menu-toggle {
-    display: block;
-    }
-
-    nav {
-    width: 100%;
-    display: none; /* hidden by default */
-    }
-
-    nav.active {
-    display: block; /* shown when toggled */
-    }
-
-    nav ul {
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 10px;
-    width: 100%;
-    }
-
-    nav ul li a {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.05);
-    }
-
-    nav ul li a:hover {
-    background: #4fc3f7;
-    color: #0f2027;
-    text-shadow: none;
-    }
-
-    .register-button {
-    text-align: center;
-    width: 100%;
-    }
-
-    .hero {
-    margin-top: 40px;
-    margin-bottom: 30px;
-  }
-
-  .h-1 {
-    font-size: 32px;
-    line-height: 1.2;
-  }
-
-  .h-3 {
-    font-size: 18px;
-  }
-
-  .p-1 {
-    font-size: 16px;
-    padding: 0 10px; /* prevent text from hitting screen edges */
-  }
-
-  .college-logo img {
-    width: 100px;
-  }
-
-  .register-btn {
-    font-size: 16px;
-    padding: 10px 18px;
-    margin-top: 20px;
-  }
-
-  #countdown {
-    width: 95%;
-    padding: 10px;
-  }
-
-  .timer {
-    gap: 0.5rem; /* tighter spacing */
-  }
-
-  .countdown-item {
-    padding: 0.4rem 0.6rem;
-    min-width: 55px;
-  }
-
-  .countdown-item span {
-    font-size: 1.6rem;
-  }
-
-  .countdown-item p {
-    font-size: 0.75rem;
-  }
-
-  .about {
-    margin-top: 60px;
-    padding: 14px 16px;
-    font-size: 15px;
-    border-radius: 10px;
-  }
-
-  .h-2 {
-    font-size: 20px;
-    margin-bottom: 16px;
-  }
-
-  .about p {
-    line-height: 1.6;
-    text-align: justify; /* ✅ improves readability on small screens */
-  }
-
-    .details {
-    font-size: 18px;
-    padding: 14px;
-  }
-
-  .detail-card {
-    width: 100%; /* stack cards but keep design */
-    max-width: 300px;
-    margin: auto;
-  }
-
-  .why-join {
-    font-size: 18px;
-    padding: 14px 16px;
-    line-height: 1.6;
-  }
-
-  .why-join h2 {
-    font-size: 26px;
-  }
-
-      .themes-section {
-        max-width: 100%;
-        padding: 10px;
-    }
-
-    .theme-list {
-        gap: 15px;
-    }
-
-    .theme-card {
-        width: 140px;
-        height: 140px;
-        font-size: 13px;
-        padding: 10px;
-    }
-
-    .themes h2 {
-        font-size: 20px;
-    }
-
-
-    .registration-container {
-        padding: 10px 15px;
-    }
-
-    .form-section {
-        padding: 8px 10px;
-    }
-
-    .form-section input {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    .submit-btn {
-        width: 160px;
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    .registration-container h2 {
-        font-size: 20px;
-    }
-
-    .form-section h3 {
-        font-size: 16px;
-    }
-
-    .contact-section {
-        padding: 10px;
-        max-width: 95%;
-    }
-
-    .contact-card {
-        flex: 1 1 100%; /* stack vertically */
-        padding: 10px;
-    }
-
-    .contact-section h2 {
-        font-size: 1.5rem;
-    }
-  
-  
-      .maps {
-        padding: 10px;
-    }
-
-    .maps h1 {
-        font-size: 1.5rem;
-    }
-}
-
-
-@media (max-width: 768px) {
-  .timeline::after {
-    left: 8px; /* shift line to the side */
-  }
-
-  .timeline-item {
-    width: 80%;
-    padding-left: 30px;
-    padding-right: 0;
-    margin-bottom: 20px;
-  }
-
-  .timeline-item.left,
-  .timeline-item.right {
-    left: 0;
-    text-align: left;
-  }
-
-  .timeline-item::after {
-    left: 0;
-    margin-left: -2px;
-  }
-
-  .timeline-content {
-    margin-left: 20px;
-  }
-
-  .timeline-content::before {
-    left: -20px;
-    border-right-color: #121212;
-    right: auto;
-    border-left-color: transparent;
-  }
-
-
-
-}
