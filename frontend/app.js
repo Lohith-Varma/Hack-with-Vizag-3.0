@@ -45,93 +45,166 @@ function typeLetterByLetter() {
 
 window.onload = typeLetterByLetter;
 
+
 document.getElementById("registrationForm").addEventListener("submit", async (e) => {
 
   e.preventDefault();
 
   const responseMessageElement = document.getElementById("responseMessage");
+  responseMessageElement.textContent = 'Submitting...';
+  responseMessageElement.style.color = 'white';
+  
+  const teamName = document.getElementById("teamName").value;
+  const collegeName = document.getElementById("collegeName").value;
 
-  responseMessageElement.textContent = "";
+  const leader = {
+    name: document.getElementById("leaderName").value,
+    roll: document.getElementById("leaderRoll").value,
+    email: document.getElementById("leaderEmail").value,
+    phone: document.getElementById("leaderPhone").value
+  };  
 
-  const teamName = document.getElementById("team-name").value.trim();
-  const collegeName = document.getElementById("college-name").value.trim();
-  const leaderName = document.getElementById("leader-name").value.trim();
-  const leaderRoll = document.getElementById("leader-roll").value.trim();
-  const leaderEmail = document.getElementById("leader-mail").value.trim();
-  const leaderPhone = document.getElementById("leader-phone").value.trim();
-  const member2Name = document.getElementById("member2-name").value.trim();
-  const member2Roll = document.getElementById("member2-roll").value.trim();
-  const member3Name = document.getElementById("member3-name").value.trim();
-  const member3Roll = document.getElementById("member3-roll").value.trim();
-  const member4Name = document.getElementById("member4-name").value.trim();
-  const member4Roll = document.getElementById("member4-roll").value.trim();
+  const members = [];
 
-  if (!teamName || !collegeName || !leaderName || !leaderRoll || !leaderEmail || !leaderPhone || !member2Name || !member2Roll || !member3Name || !member3Roll) {
-      responseMessageElement.textContent = "Please fill out all required fields.";
-      responseMessageElement.style.color = "red";
-      return; // Stop the function if validation fails
+  members.push({
+    name: document.getElementById("member2Name").value,
+    roll: document.getElementById("member2Roll").value
+  });
+
+  const member2Name = document.getElementById("member2Name").value.trim();
+    if (member2Name) {
+      members.push({
+            name: member2Name,
+            roll: document.getElementById("member2Roll").value,
+      });
   }
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!emailPattern.test(leaderEmail)) {
-    responseMessageElement.textContent = "Please enter a valid email address.";
-    responseMessageElement.style.color = "red";
-    return;
-  }
-
-  const phonePattern = /^\d{10}$/;
-  if(!phonePattern.test(leaderPhone)) {
-    responseMessageElement.textContent = "Please enter a valid 10-digit mobile number.";
-    responseMessageElement.style.color = "red";
-    return;
-  }
-
-  const registrationData = {
-    teamName,
-    collegeName,
-    leader: {
-      name: leaderName,
-      roll: leaderRoll,
-      email: leaderEmail,
-      phone: leaderPhone,
-    },
-    members: [
-      {name: member2Name, roll: member2Roll},
-      {name: member3Name, roll: member3Roll},
-    ],
-  };
-
-  if (member4Name && member4Roll) {
-      registrationData.members.push({ name: member4Name, roll: member4Roll });
-  }
-
-  try{
-    responseMessageElement.textContent = "Submitting...";
-    responseMessageElement.style.color = "orange";
-
-    const response = await fetch("http://localhost:5000/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(registrationData),
-    }); 
-
-    const data = await response.json();
-
-    responseMessageElement.textContent = data.message;
-    responseMessageElement.style.color = response.ok ? "green" : "red";
-
-    if(response.ok) {
-      document.getElementById("registrationForm").reset();
+   const member3Name = document.getElementById("member3Name").value.trim();
+    if (member3Name) {
+        members.push({
+            name: member3Name,
+            roll: document.getElementById("member3Roll").value,
+        });
     }
-  }
 
-  catch (error) {
-    console.error("Error:", error); 
-    responseMessageElement.textContent = "Error: Could not connect to the server.";
-    responseMessageElement.style.color = "red";
-  }
+     const registrationData = {
+        teamName,
+        collegeName,
+        leader,
+        members,
+    };
 
+    try{
+
+      const response = await fetch("https://www.localhost:5000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(registrationData),
+      });
+
+      const data = await response.json();
+
+      if(response.ok){
+        responseMessageElement.textContent = data.message;
+        responseMessageElement.style.color = "lightgreen";
+        document.getElementById("registrationForm").reset();
+      } 
+      else{
+        responseMessageElement.textContent = `Error: ${data.message}`;
+        responseMessageElement.style.color = 'salmon';
+      }
+    }
+
+      catch (error) {
+        console.error("Submission Error: ", error);
+        responseMessageElement.textContent = "Error: Could not connect to the Server.";
+        responseMessageElement.style.color = "salmon";
+      }
+    
 });
+
+
+  // responseMessageElement.textContent = "";
+
+//   const teamName = document.getElementById("team-name").value.trim();
+//   const collegeName = document.getElementById("college-name").value.trim();
+//   const leaderName = document.getElementById("leader-name").value.trim();
+//   const leaderRoll = document.getElementById("leader-roll").value.trim();
+//   const leaderEmail = document.getElementById("leader-mail").value.trim();
+//   const leaderPhone = document.getElementById("leader-phone").value.trim();
+//   const member2Name = document.getElementById("member2-name").value.trim();
+//   const member2Roll = document.getElementById("member2-roll").value.trim();
+//   const member3Name = document.getElementById("member3-name").value.trim();
+//   const member3Roll = document.getElementById("member3-roll").value.trim();
+//   const member4Name = document.getElementById("member4-name").value.trim();
+//   const member4Roll = document.getElementById("member4-roll").value.trim();
+
+//   if (!teamName || !collegeName || !leaderName || !leaderRoll || !leaderEmail || !leaderPhone || !member2Name || !member2Roll || !member3Name || !member3Roll) {
+//       responseMessageElement.textContent = "Please fill out all required fields.";
+//       responseMessageElement.style.color = "red";
+//       return; // Stop the function if validation fails
+//   }
+
+//   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   if(!emailPattern.test(leaderEmail)) {
+//     responseMessageElement.textContent = "Please enter a valid email address.";
+//     responseMessageElement.style.color = "red";
+//     return;
+//   }
+
+//   const phonePattern = /^\d{10}$/;
+//   if(!phonePattern.test(leaderPhone)) {
+//     responseMessageElement.textContent = "Please enter a valid 10-digit mobile number.";
+//     responseMessageElement.style.color = "red";
+//     return;
+//   }
+
+//   const registrationData = {
+//     teamName,
+//     collegeName,
+//     leader: {
+//       name: leaderName,
+//       roll: leaderRoll,
+//       email: leaderEmail,
+//       phone: leaderPhone,
+//     },
+//     members: [
+//       {name: member2Name, roll: member2Roll},
+//       {name: member3Name, roll: member3Roll},
+//     ],
+//   };
+
+//   if (member4Name && member4Roll) {
+//       registrationData.members.push({ name: member4Name, roll: member4Roll });
+//   }
+
+//   try{
+//     responseMessageElement.textContent = "Submitting...";
+//     responseMessageElement.style.color = "orange";
+
+//     const response = await fetch("https://hackwithvizag-backend.onrender.com/", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(registrationData),
+//     }); 
+
+//     const data = await response.json();
+
+//     responseMessageElement.textContent = data.message;
+//     responseMessageElement.style.color = response.ok ? "green" : "red";
+
+//     if(response.ok) {
+//       document.getElementById("registrationForm").reset();
+//     }
+//   }
+
+//   catch (error) {
+//     console.error("Error:", error); 
+//     responseMessageElement.textContent = "Error: Could not connect to the server.";
+//     responseMessageElement.style.color = "red";
+//   }
+
+// });
 
 
 

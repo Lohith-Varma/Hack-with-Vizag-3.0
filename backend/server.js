@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const rateLimit = require('express-rate-limit');
 
 const rateLimit = require('express-rate-limit');
 
@@ -8,16 +9,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const rateLimit = require('express-rate-limit');
-
-const limiter = rateLimit({
+const registrationLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 10, // Limit each IP to 10 requests per windowMs
     standardHeaders: true,
     legacyHeaders: false,
     message: 'Too many registration attempts from this IP, please try again after 15 minutes',
 });
-app.use('/register', limiter);
+app.use('/register', registrationLimiter);
 
 // --- CONNECTING TO MONGODB ---
 const MONGO_URI = "mongodb+srv://siddu_0426:lohith2006@hackathoncluster.k1xp9kp.mongodb.net/hackathon?retryWrites=true&w=majority&appName=HackathonCluster";
@@ -94,52 +93,6 @@ app.post("/register", async (req, res) => {
     }
 });
 
-// const registrationSchema = new mongoose.Schema({
-//     teamName: String,
-//     leaderName: String,
-//     teamMembers: [String],
-//     email: { type: String, unique: true },
-//     college: String,
-//     phonenum: { type: String, unique: true },   
-// });
-
-// const Registration = mongoose.model("Registration", registrationSchema);
-
-// --- API ROUTE TO HANDLE FORM SUBMISSION ---
-// app.post("/register", async (req, res) => {
-//     try {
-//         // --- NEW DIAGNOSTIC LINE ---
-//         console.log("✅ Received registration request with body:", req.body);
-
-//         const { teamName, leaderName, teamMembers, email, college, phonenum } = req.body;
-
-//         // Check for a duplicate email or phone number
-//         const existing = await Registration.findOne({ $or: [{ email }, { phonenum }] });
-//         if (existing) {
-//             console.log("⚠️ Found duplicate entry.");
-//             return res.status(400).json({ message: "This team leader is already registered!" });
-//         }
-
-//         // Save the new registration to the database
-//         console.log("📝 Attempting to save new registration...");
-//         const newReg = new Registration({ teamName, leaderName, teamMembers, email, college, phonenum });
-//         await newReg.save();
-//         console.log("💾 Registration saved successfully!");
-
-//         // Send a success response
-//         res.status(201).json({ message: "Registration Successful!" });
-//     }
-//     catch (error) {
-//         // Log the detailed error to the terminal
-//         console.error("💥 REGISTRATION FAILED:", error);
-
-//         // Send a more detailed error message back to the frontend
-//         res.status(500).json({
-//             message: "Something went wrong on the server.",
-//             error: error.message
-//         });
-//     }
-// });
 
 // --- STARTING THE SERVER ---
 const PORT = process.env.PORT || 5000;
