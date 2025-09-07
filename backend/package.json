@@ -12,11 +12,12 @@
   "type": "commonjs",
   "license": "ISC",
   "engines": {
-  "node": "18.x"
+    "node": "18.x"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
     "mongoose": "^8.18.0",
     "nodemon": "^3.1.10"
   }
