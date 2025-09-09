@@ -694,7 +694,8 @@ min-height: 100vh;
   align-items: center;
   width: 700px;
   margin: 0 auto;
-  background-color: #1fd6ff;
+  margin-top: 60px;
+  background-color: #f2cc8f;
   padding: 12px 1px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
@@ -773,8 +774,8 @@ min-height: 100vh;
 
 
     .faq-container {
-        background-color: #0c0c1e;
-        color: #ffffff;
+        background-color: #bc8a5f;
+        color: #30343f;
         padding: 3rem, 2rem;
         box-sizing: border-box;
         display: flex;
@@ -792,7 +793,7 @@ min-height: 100vh;
         font-size: 3rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
-        background: linear-gradient(90deg, #3a7bd5, #3a97d5, #00d4ff, #00f2ff);
+        background: linear-gradient(90deg, #780116, #c9184a, #780116, #c9184a);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -800,7 +801,7 @@ min-height: 100vh;
 
     .faq-container  .subtitle {
         font-size: 1.1rem;
-        color: #b0b0c0;
+        color: #30343f;
         margin-bottom: 2rem;
     }
 
@@ -811,23 +812,23 @@ min-height: 100vh;
     }
 
     .faq-list {
-        background-color: rgba(22, 22, 43, 0.85);
+        background-color: #f3d5b5;
         border-radius: 15px;
         padding: 20px 40px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid #603808;
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
 
     .faq-intro {
-        color: #00d4ff;
-        font-size: 1.2rem;
+        color: #78290f;
+        font-size: 1.3rem;
         font-weight: 600;
         margin-bottom: 25px;
         text-align: left;
     }
 
     .faq-item {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        border-bottom: 1px solid #78290f;
         padding: 15px 0;
     }
 
@@ -838,7 +839,7 @@ min-height: 100vh;
     .faq-question {
         background: none;
         border: none;
-        color: #ffffff;
+        color: #38040e;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -846,23 +847,24 @@ min-height: 100vh;
         width: 100%;
         padding: 10px 0;
         font-size: 1rem;
+        font-weight: 600;
         /* font-family: 'Poppins', sans-serif; */
         text-align: left;
         transition: color 0.3s ease;
     }
 
     .faq-question:hover {
-        color: #00d4ff;
+        color: #8d0801;
     }
 
     .faq-toggle {
         font-size: 1.5rem;
         transition: transform 0.3s ease-in-out;
-        color: #00d4ff;
+        color: #8d0801;
     }
 
     .faq-answer {
-        color: #b0b0c0;
+        color: #780116;
         font-size: 0.95rem;
         line-height: 1.6;
         text-align: left;
