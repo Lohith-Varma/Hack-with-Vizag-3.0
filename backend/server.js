@@ -116,7 +116,7 @@ const port = 3000;
 app.use(bodyParser.json());
 
 // Replace with your MongoDB Atlas connection string
-const mongoURI = 'mongodb+srv://lohithvarma:Lohith@hackwithvizag-3.dycbmhy.mongodb.net/?retryWrites=true&w=majority&appName=HackWithVizag-3'; 
+const mongoURI = "mongodb+srv://siddu_0426:lohith2006@hackathoncluster.k1xp9kp.mongodb.net/hackathon?retryWrites=true&w=majority&appName=HackathonCluster"; 
 
 // Connect to MongoDB Atlas
 mongoose.connect(mongoURI)
