@@ -441,7 +441,7 @@ registerBtn.addEventListener('click', () => {
     const amount = formData.teamSize * 400 * 100; // Amount in paise
 
     const options = {
-        key: 'YOUR_RAZORPAY_KEY', // IMPORTANT: Replace with your actual key
+        key: 'rzp_test_RFQtXJEh3wImMo', // IMPORTANT: Replace with your actual key
         amount: amount,
         currency: 'INR',
         name: 'Hackathon Registration',

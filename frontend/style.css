@@ -53,10 +53,10 @@ body {
   display: flex; /* Helps align the letters */
   font-size: 9rem;  /* Use your original font size */
   font-weight: 700;
-  color: #ffffff;
+  color: rgb(255, 255, 255);
   letter-spacing: 1px;
   background-blend-mode:multiply;
-  background-color: #c20114;
+  /* background-color: #000; */
 }
 
 .logo-title span {
@@ -232,14 +232,16 @@ min-height: 100vh;
 
 .h-3 {
   margin-top: 0;
-  font-size: 22px;
-  color: #4fc3f7; /* brighter blue for readability */
+  font-size: 24px;
+  color: #597a89; /* brighter blue for readability */
 }
 
 .p-1 {
-  font-size: 24px;
-  margin-top: 14px;
-  color: rgba(40, 40, 40, 0.95);
+  font-size: 28px;
+  margin-top: 10px;
+  color: rgba(0, 0, 0, 0.95);
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 
