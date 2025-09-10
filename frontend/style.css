@@ -176,9 +176,10 @@ nav ul li a:hover {
 
     /* Hero Section */
 .hero {
-      /* background-image: url(../frontend/assets/vizag.jpg);/
-        */
-        background-image: url(../frontend/assets/vizag.jpg);
+       /* background-image: url(../frontend/assets/nsrit\ main\ block.webp); */
+       /* background-color: linear-gradient=rgba(0, 0, 0,1); */
+      
+        /* background-image: url(../frontend/assets/vizag.jpg); */
 background-color: #ede0d4;
 background-size: cover;
 background-position: center;
@@ -310,7 +311,7 @@ min-height: 100vh;
         padding: 18px 20px;
         border: 2px solid black;
         border-radius: 8px;
-        background-color: #333d29;
+        background-color: #264653;
         text-decoration: none;
     }
 
@@ -411,13 +412,15 @@ min-height: 100vh;
 }
 
 #schedule h2 {
-  color: #ffffff;
+  color: #000;
   margin-bottom: 30px;
   font-size: 2.5rem;
 }
 
 .schedule-container {
-  background: linear-gradient(45deg, #000000, #1a1a1a); /* ✅ fixed gradient */
+  background: #ffffff;
+  color: #000;
+  border: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -446,7 +449,7 @@ min-height: 100vh;
 
 /* Event containers */
 .timeline-item {
-  padding: 0 40px;
+  padding: 0 90px;
   margin-bottom: 30px;
   position: relative;
   width: 50%;
@@ -454,7 +457,7 @@ min-height: 100vh;
 
 /* Left items */
 .timeline-item.left {
-  left: -15%;
+  left: -29.3%;
   text-align: right;
 }
 
@@ -867,7 +870,7 @@ min-height: 100vh;
 
     .faq-answer {
         color: #780116;
-        font-size: 0.95rem;
+        font-size: 1.1rem;
         line-height: 1.6;
         text-align: left;
         max-height: 0;
