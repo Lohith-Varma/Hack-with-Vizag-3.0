@@ -59,7 +59,7 @@
                     <img src="" alt="Payment QR Code" id="qr-code-image">
                     
                     <label for="transaction-id">UPI Transaction ID:</label>
-                    <input type="text" id="transaction-id" name="transaction-id" placeholder="Enter your 12-digit UPI reference number" required>
+                    <input type="text" id="transactionId" name="transaction-id" placeholder="Enter your 12-digit UPI reference number" required>
                 </div>
 
                 <button type="button" id="register-button">Submit Registration</button>
@@ -76,8 +76,9 @@
         </form>
     </div>
 
-<script>
-        // --- Step 1: DOM Element Selection ---
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+             // --- Step 1: DOM Element Selection ---
     const sections = document.querySelectorAll('.form-section');
     const prevBtn = document.getElementById('previous-button');
     const nextBtn = document.getElementById('next-button');
@@ -89,8 +90,11 @@
 // You may need to add this to your HTML: <div id="loading-message" style="display:none;">Loading...</div>
     const loadingMessage = document.getElementById('loading-message'); 
     const responseMessage = document.getElementById('responseMessage');
+    const transactionId = document.getElementById('transactionId');
 
     let currentSectionIndex = 0;
+
+    const API_BASE = 'http://localhost:3000';
 
 // --- Step 2: Section Navigation Logic ---
 const showSection = (index) => {
@@ -116,7 +120,7 @@ const generateMemberFields = () => {
             <label for="member-${i + 1}-student-id">Student ID:</label>
             <input type="text" id="member-${i + 1}-student-id" name="member-${i + 1}-student-id" required>
         `;
-        memberDiv.classList.add('member-field-group');
+        // memberDiv.classList.add('member-field-group');
         memberFieldsDiv.appendChild(memberDiv);
     }
 };
@@ -128,6 +132,7 @@ const validateCurrentSection = () => {
     for (const input of inputs) {
         if (!input.value.trim()) {
             responseMessage.textContent = 'Please fill out all required fields.';
+            responseMessage.style.color = 'red';
             input.focus();
             return false;
         }
@@ -139,24 +144,24 @@ const validateCurrentSection = () => {
 const validateUniqueKeys = () => {
     const leaderStudentId = document.getElementById('team-leader-student-id').value.trim();
     const memberStudentIds = [];
-    const teamSize = parseInt(teamSizeSelect.value);
+    if(leaderStudentId) memberStudentIds.push(leaderStudentId);
 
+    const teamSize = parseInt(teamSizeSelect.value);
     for (let i = 0; i < teamSize - 1; i++) {
         const memberId = document.getElementById(`member-${i + 1}-student-id`).value.trim();
-         memberStudentIds.push({
-            name: document.getElementById(`member-${i + 1}-name`).value.trim(),
-            studentId: document.getElementById(`member-${i + 1}-student-id`).value.trim()
-        });
+        if (memberId) memberStudentIds.push(memberId);
     }
 
-    if (leaderStudentId !== '' && memberStudentIds.includes(leaderStudentId)) {
-        alert("The Team Leaders Student ID is duplicated by a Team Members ID. Please ensure all IDs are unique.")
-        return false;
-    }
+    // if (leaderStudentId !== '' && memberStudentIds.includes(leaderStudentId)) {
+    //     alert("The Team Leaders Student ID is duplicated by a Team Members ID. Please ensure all IDs are unique.")
+    //     return false;
+    // }
 
     const uniqueMemberIds = new Set(memberStudentIds);
     if (uniqueMemberIds.size !== memberStudentIds.length) {
-        alert("Duplicate Student IDs found among team members. Please ensure all IDs are unique.");
+        // alert("Duplicate Student IDs found among team members. Please ensure all IDs are unique.");
+        responseMessage.textContent = 'Duplicate Student IDs found among team members. Please ensure all IDs are unique.';
+        responseMessage.style.color = 'red';
         return false;
     }
     return true;
@@ -245,9 +250,9 @@ prevBtn.addEventListener('click', () => {
 });
 
 registerBtn.addEventListener('click', async () => {
-    // const formData = collectFormData();
-    const transactionIdInput = document.getElementById('transaction-id');
-    // const amount = formData.teamSize * 400 * 100; // Amount in paise
+    const formData = collectFormData();
+    const transactionIdInput = document.getElementById('transactionId');
+    const amount = formData.teamSize * 400 * 100; // Amount in paise
     if (!transactionIdInput.value.trim()) {
             responseMessage.textContent = 'Please enter the UPI Transaction ID.';
             responseMessage.style.color = 'red';
@@ -256,19 +261,21 @@ registerBtn.addEventListener('click', async () => {
     }
 
     const registrationData = collectFormData();
+    registrationData.transactionId = transactionIdInput.value.trim();
+
     loadingMessage.textContent = 'Submitting registration...';
     loadingMessage.style.display = 'block';
     responseMessage.textContent = '';
     
     try {
-        const res = await fetch('/api/register', {
+        const res = await fetch('http://localhost:5000/api/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(registrationData)
         });
         const data = await res.json();
 
-         if (data.success) {
+         if (res.ok) {
                     loadingMessage.style.display = 'none';
                     form.style.display = 'none';
                     responseMessage.style.color = 'green';
@@ -280,7 +287,7 @@ registerBtn.addEventListener('click', async () => {
     }
     catch(err) {
         responseMessage.textContent = 'A network error occurred. Please try again.';
-        responseMessage.textContent = 'red';
+        responseMessage.style.color = 'red';
         console.error("Submission Error: ", err);
     } finally {
         loadingMessage.style.display = 'none';
@@ -292,6 +299,7 @@ generateMemberFields();
 // Show the first section of the form
 showSection(currentSectionIndex);
 teamSizeSelect.addEventListener('change', generateMemberFields);
+        });
     </script>
 </body>
 </html>

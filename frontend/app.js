@@ -106,230 +106,232 @@ const faqItems = faqComponent.querySelectorAll('.faq-item');
     });
 }
 
-// ==========================================================================================================================================
-// Registration Form
-// ==========================================================================================================================================
+// // ==========================================================================================================================================
+// // Registration Form
+// // ==========================================================================================================================================
 
-// --- Step 1: DOM Element Selection ---
-const sections = document.querySelectorAll('.form-section');
-const prevBtn = document.getElementById('previous-button');
-const nextBtn = document.getElementById('next-button');
-const registerBtn = document.getElementById('register-button');
-const teamSizeSelect = document.getElementById('team-size');
-const memberFieldsDiv = document.getElementById('member-fields');
-const form = document.getElementById('registration-form');
-const summaryDiv = document.getElementById('summary');
-// You may need to add this to your HTML: <div id="loading-message" style="display:none;">Loading...</div>
-const loadingMessage = document.getElementById('loading-message'); 
-let currentSectionIndex = 0;
+// // --- Step 1: DOM Element Selection ---
+// const sections = document.querySelectorAll('.form-section');
+// const prevBtn = document.getElementById('previous-button');
+// const nextBtn = document.getElementById('next-button');
+// const registerBtn = document.getElementById('register-button');
+// const teamSizeSelect = document.getElementById('team-size');
+// const memberFieldsDiv = document.getElementById('member-fields');
+// const form = document.getElementById('registration-form');
+// const summaryDiv = document.getElementById('summary');
+// // You may need to add this to your HTML: <div id="loading-message" style="display:none;">Loading...</div>
+// const loadingMessage = document.getElementById('loading-message'); 
+// let currentSectionIndex = 0;
 
-// --- Step 2: Section Navigation Logic ---
-const showSection = (index) => {
-    sections.forEach((section) => {
-        section.classList.remove('active');
-    });
-    sections[index].classList.add('active');
-    prevBtn.style.display = index === 0 ? 'none' : 'block';
-    nextBtn.style.display = index === sections.length - 1 ? 'none' : 'block';
-    registerBtn.style.display = index === sections.length - 1 ? 'block' : 'none';
-};
+// // --- Step 2: Section Navigation Logic ---
+// const showSection = (index) => {
+//     sections.forEach((section) => {
+//         section.classList.remove('active');
+//     });
+//     sections[index].classList.add('active');
+//     prevBtn.style.display = index === 0 ? 'none' : 'block';
+//     nextBtn.style.display = index === sections.length - 1 ? 'none' : 'block';
+//     registerBtn.style.display = index === sections.length - 1 ? 'block' : 'none';
+// };
 
-// --- Step 3: Dynamic Team Member Fields Generation ---
-const generateMemberFields = () => {
-    const teamSize = parseInt(teamSizeSelect.value);
-    memberFieldsDiv.innerHTML = '';
-    for (let i = 0; i < teamSize - 1; i++) {
-        const memberDiv = document.createElement('div');
-        memberDiv.innerHTML = `
-            <h3>Member ${i + 1}</h3>
-            <label for="member-${i + 1}-name">Name:</label>
-            <input type="text" id="member-${i + 1}-name" name="member-${i + 1}-name" required>
-            <label for="member-${i + 1}-student-id">Student ID:</label>
-            <input type="text" id="member-${i + 1}-student-id" name="member-${i + 1}-student-id" required>
-        `;
-        memberDiv.classList.add('member-field-group');
-        memberFieldsDiv.appendChild(memberDiv);
-    }
-};
+// // --- Step 3: Dynamic Team Member Fields Generation ---
+// const generateMemberFields = () => {
+//     const teamSize = parseInt(teamSizeSelect.value);
+//     memberFieldsDiv.innerHTML = '';
+//     for (let i = 0; i < teamSize - 1; i++) {
+//         const memberDiv = document.createElement('div');
+//         memberDiv.innerHTML = `
+//             <h3>Member ${i + 1}</h3>
+//             <label for="member-${i + 1}-name">Name:</label>
+//             <input type="text" id="member-${i + 1}-name" name="member-${i + 1}-name" required>
+//             <label for="member-${i + 1}-student-id">Student ID:</label>
+//             <input type="text" id="member-${i + 1}-student-id" name="member-${i + 1}-student-id" required>
+//         `;
+//         memberDiv.classList.add('member-field-group');
+//         memberFieldsDiv.appendChild(memberDiv);
+//     }
+// };
 
-teamSizeSelect.addEventListener('change', generateMemberFields);
+// teamSizeSelect.addEventListener('change', generateMemberFields);
 
-// --- Step 4: Form Validation, Data Collection, and Summary ---
-const validateCurrentSection = () => {
-    const currentSection = sections[currentSectionIndex];
-    const inputs = currentSection.querySelectorAll('input, select');
-    for (const input of inputs) {
-        if (input.hasAttribute('required') && input.value.trim() === '') {
-            alert('Please fill out all required fields.');
-            input.focus();
-            return false;
-        }
-    }
-    return true;
-};
+// // --- Step 4: Form Validation, Data Collection, and Summary ---
+// const validateCurrentSection = () => {
+//     const currentSection = sections[currentSectionIndex];
+//     const inputs = currentSection.querySelectorAll('input, select');
+//     for (const input of inputs) {
+//         if (input.hasAttribute('required') && input.value.trim() === '') {
+//             alert('Please fill out all required fields.');
+//             input.focus();
+//             return false;
+//         }
+//     }
+//     return true;
+// };
 
-const validateUniqueKeys = () => {
-    const leaderStudentId = document.getElementById('team-leader-student-id').value.trim();
-    const memberStudentIds = [];
-    const teamSize = parseInt(teamSizeSelect.value);
+// const validateUniqueKeys = () => {
+//     const leaderStudentId = document.getElementById('team-leader-student-id').value.trim();
+//     const memberStudentIds = [];
+//     const teamSize = parseInt(teamSizeSelect.value);
 
-    for (let i = 0; i < teamSize - 1; i++) {
-        const memberId = document.getElementById(`member-${i + 1}-student-id`).value.trim();
-        if (memberId !== '') { 
-            memberStudentIds.push(memberId);
-        }
-    }
+//     for (let i = 0; i < teamSize - 1; i++) {
+//         const memberId = document.getElementById(`member-${i + 1}-student-id`).value.trim();
+//         if (memberId !== '') { 
+//             memberStudentIds.push(memberId);
+//         }
+//     }
 
-    if (leaderStudentId !== '' && memberStudentIds.includes(leaderStudentId)) {
-        alert("The Team Leader's Student ID is duplicated by a Team Member's ID. Please ensure all IDs are unique.");
-        return false;
-    }
+//     if (leaderStudentId !== '' && memberStudentIds.includes(leaderStudentId)) {
+//         alert("The Team Leader's Student ID is duplicated by a Team Member's ID. Please ensure all IDs are unique.");
+//         return false;
+//     }
 
-    const uniqueMemberIds = new Set(memberStudentIds);
-    if (uniqueMemberIds.size !== memberStudentIds.length) {
-        alert("Duplicate Student IDs found among team members. Please ensure all IDs are unique.");
-        return false;
-    }
-    return true;
-};
+//     const uniqueMemberIds = new Set(memberStudentIds);
+//     if (uniqueMemberIds.size !== memberStudentIds.length) {
+//         alert("Duplicate Student IDs found among team members. Please ensure all IDs are unique.");
+//         return false;
+//     }
+//     return true;
+// };
 
-const collectFormData = () => {
-    const formData = {
-        teamName: document.getElementById('team-name').value,
-        collegeName: document.getElementById('college-name').value,
-        teamSize: parseInt(teamSizeSelect.value),
-        leaderName: document.getElementById('team-leader-name').value,
-        leaderEmail: document.getElementById('team-leader-email').value,
-        leaderPhone: document.getElementById('team-leader-phone-number').value,
-        leaderStudentId: document.getElementById('team-leader-student-id').value,
-        teamMembers: []
-    };
-    const teamSize = parseInt(teamSizeSelect.value);
-    for (let i = 0; i < teamSize - 1; i++) {
-        formData.teamMembers.push({
-            name: document.getElementById(`member-${i + 1}-name`).value,
-            studentId: document.getElementById(`member-${i + 1}-student-id`).value
-        });
-    }
-    return formData;
-};
+// const collectFormData = () => {
+//     const formData = {
+//         teamName: document.getElementById('team-name').value,
+//         collegeName: document.getElementById('college-name').value,
+//         teamSize: parseInt(teamSizeSelect.value),
+//         leaderName: document.getElementById('team-leader-name').value,
+//         leaderEmail: document.getElementById('team-leader-email').value,
+//         leaderPhone: document.getElementById('team-leader-phone-number').value,
+//         leaderStudentId: document.getElementById('team-leader-student-id').value,
+//         teamMembers: []
+//     };
+//     const teamSize = parseInt(teamSizeSelect.value);
+//     for (let i = 0; i < teamSize - 1; i++) {
+//         formData.teamMembers.push({
+//             name: document.getElementById(`member-${i + 1}-name`).value,
+//             studentId: document.getElementById(`member-${i + 1}-student-id`).value
+//         });
+//     }
+//     return formData;
+// };
 
-const displaySummary = () => {
-    const formData = collectFormData();
-    const summaryHtml = `
-        <h3>Team Information</h3>
-        <p><strong>Team Name:</strong> ${formData.teamName}</p>
-        <p><strong>College:</strong> ${formData.collegeName}</p>
-        <p><strong>Team Size:</strong> ${formData.teamSize}</p>
-        <h3>Team Leader</h3>
-        <p><strong>Name:</strong> ${formData.leaderName}</p>
-        <p><strong>Email:</strong> ${formData.leaderEmail}</p>
-        <p><strong>Phone:</strong> ${formData.leaderPhone}</p>
-        <p><strong>Student ID:</strong> ${formData.leaderStudentId}</p>
-        <h3>Team Members</h3>
-        <ul>
-            ${formData.teamMembers.map(member => `
-                <li><strong>Name:</strong> ${member.name}, <strong>Student ID:</strong> ${member.studentId}</li>
-            `).join('')}
-        </ul>
-        <h3>Registration Fee</h3>
-        <p><strong>Total Amount:</strong> ₹${formData.teamSize * 400}</p>
-    `;
-    summaryDiv.innerHTML = summaryHtml;
-};
+// const displaySummary = () => {
+//     const formData = collectFormData();
+//     const summaryHtml = `
+//         <h3>Team Information</h3>
+//         <p><strong>Team Name:</strong> ${formData.teamName}</p>
+//         <p><strong>College:</strong> ${formData.collegeName}</p>
+//         <p><strong>Team Size:</strong> ${formData.teamSize}</p>
+//         <h3>Team Leader</h3>
+//         <p><strong>Name:</strong> ${formData.leaderName}</p>
+//         <p><strong>Email:</strong> ${formData.leaderEmail}</p>
+//         <p><strong>Phone:</strong> ${formData.leaderPhone}</p>
+//         <p><strong>Student ID:</strong> ${formData.leaderStudentId}</p>
+//         <h3>Team Members</h3>
+//         <ul>
+//             ${formData.teamMembers.map(member => `
+//                 <li><strong>Name:</strong> ${member.name}, <strong>Student ID:</strong> ${member.studentId}</li>
+//             `).join('')}
+//         </ul>
+//         <h3>Registration Fee</h3>
+//         <p><strong>Total Amount:</strong> ₹${formData.teamSize * 400}</p>
+//     `;
+//     summaryDiv.innerHTML = summaryHtml;
+// };
 
-// --- Step 5: Main Event Listeners and Logic ---
-nextBtn.addEventListener('click', async () => {
-    if (validateCurrentSection()) {
-        if (currentSectionIndex === 1 || currentSectionIndex === 2) {
-            if (!validateUniqueKeys()) {
-                return;
-            }
-        }
+// // --- Step 5: Main Event Listeners and Logic ---
+// nextBtn.addEventListener('click', async () => {
+//     if (validateCurrentSection()) {
+//         if (currentSectionIndex === 1 || currentSectionIndex === 2) {
+//             if (!validateUniqueKeys()) {
+//                 return;
+//             }
+//         }
         
-        // This is where you might check the database before showing the summary.
-        // if (currentSectionIndex === sections.length - 2) {
-        //     loadingMessage.style.display = 'block';
-        //     const isUnique = await checkDatabaseForDuplicates(); // You would need to create this function.
-        //     loadingMessage.style.display = 'none';
-        //     if (!isUnique) {
-        //         return;
-        //     }
-        // }
+//         // This is where you might check the database before showing the summary.
+//         // if (currentSectionIndex === sections.length - 2) {
+//         //     loadingMessage.style.display = 'block';
+//         //     const isUnique = await checkDatabaseForDuplicates(); // You would need to create this function.
+//         //     loadingMessage.style.display = 'none';
+//         //     if (!isUnique) {
+//         //         return;
+//         //     }
+//         // }
 
-        if (currentSectionIndex < sections.length - 1) {
-            currentSectionIndex++;
-            if (currentSectionIndex === sections.length - 1) {
-                displaySummary();
-            }
-            showSection(currentSectionIndex);
-        }
-    }
-});
+//         if (currentSectionIndex < sections.length - 1) {
+//             currentSectionIndex++;
+//             if (currentSectionIndex === sections.length - 1) {
+//                 displaySummary();
+//             }
+//             showSection(currentSectionIndex);
+//         }
+//     }
+// });
 
-prevBtn.addEventListener('click', () => {
-    if (currentSectionIndex > 0) {
-        currentSectionIndex--;
-        showSection(currentSectionIndex);
-    }
-});
+// prevBtn.addEventListener('click', () => {
+//     if (currentSectionIndex > 0) {
+//         currentSectionIndex--;
+//         showSection(currentSectionIndex);
+//     }
+// });
 
-registerBtn.addEventListener('click', () => {
-    const formData = collectFormData();
-    const amount = formData.teamSize * 400 * 100; // Amount in paise
+// registerBtn.addEventListener('click', () => {
+//     const formData = collectFormData();
+//     const amount = formData.teamSize * 400 * 100; // Amount in paise
 
-    const options = {
-        key: 'rzp_test_RFQtXJEh3wImMo', // IMPORTANT: Replace with your actual key
-        amount: amount,
-        currency: 'INR',
-        name: 'Hackathon Registration',
-        description: 'Team Registration',
-        prefill: {
-            name: formData.leaderName,
-            email: formData.leaderEmail,
-            contact: formData.leaderPhone
-        },
-        handler: async function(response) {
-            loadingMessage.textContent = 'Payment successful. Saving your registration...';
-            loadingMessage.style.display = 'block';
-            form.style.display = 'none';
+//     const options = {
+//         key: 'rzp_test_RFQtXJEh3wImMo', // IMPORTANT: Replace with your actual key
+//         amount: amount,
+//         currency: 'INR',
+//         name: 'Hackathon Registration',
+//         description: 'Team Registration',
+//         prefill: {
+//             name: formData.leaderName,
+//             email: formData.leaderEmail,
+//             contact: formData.leaderPhone
+//         },
+//         handler: async function(response) {
+//             loadingMessage.textContent = 'Payment successful. Saving your registration...';
+//             loadingMessage.style.display = 'block';
+//             form.style.display = 'none';
 
-            try {
-                const registrationResponse = await fetch('/api/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ...formData, paymentId: response.razorpay_payment_id })
-                });
-                const data = await registrationResponse.json();
+//             try {
+//                 const registrationResponse = await fetch('/api/register', {
+//                     method: 'POST',
+//                     headers: { 'Content-Type': 'application/json' },
+//                     body: JSON.stringify({ ...formData, paymentId: response.razorpay_payment_id })
+//                 });
+//                 const data = await registrationResponse.json();
                 
-                if (data.success) {
-                    alert('Registration successful and payment confirmed!');
-                    form.reset();
-                    showSection(0);
-                } else {
-                    alert('Registration failed after payment. Please contact support with your payment ID: ' + response.razorpay_payment_id);
-                }
-            } catch (e) {
-                console.error("Error saving registration to database: ", e);
-                alert('Registration failed. Please contact support with your payment ID: ' + response.razorpay_payment_id);
-            } finally {
-                loadingMessage.style.display = 'none';
-                form.style.display = 'block';
-            }
-        },
-        modal: {
-            ondismiss: function() {
-                alert('Payment was cancelled.');
-            }
-        }
-    };
+//                 if (data.success) {
+//                     alert('Registration successful and payment confirmed!');
+//                     form.reset();
+//                     showSection(0);
+//                 } else {
+//                     alert('Registration failed after payment. Please contact support with your payment ID: ' + response.razorpay_payment_id);
+//                 }
+//             } catch (e) {
+//                 console.error("Error saving registration to database: ", e);
+//                 alert('Registration failed. Please contact support with your payment ID: ' + response.razorpay_payment_id);
+//             } finally {
+//                 loadingMessage.style.display = 'none';
+//                 form.style.display = 'block';
+//             }
+//         },
+//         modal: {
+//             ondismiss: function() {
+//                 alert('Payment was cancelled.');
+//             }
+//         }
+//     };
 
-    const rzp = new Razorpay(options);
-    rzp.open();
-});
+//     const rzp = new Razorpay(options);
+//     rzp.open();
+// });
 
-// --- Step 6: Initial Setup ---
-// Generate fields for the default team size on page load
-generateMemberFields(); 
-// Show the first section of the form
-showSection(currentSectionIndex);
+// // --- Step 6: Initial Setup ---
+// // Generate fields for the default team size on page load
+// generateMemberFields(); 
+// // Show the first section of the form
+// showSection(currentSectionIndex);
+
+

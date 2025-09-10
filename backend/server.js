@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-if(!process.env.mongo_URI) {
+if(!process.env.MONGO_URI) {
     console.error("❌ MONGO_URI is not set in the .env file.");
     process.exit(1);
 }      
@@ -20,10 +20,12 @@ const registrationLimiter = rateLimit({
     legacyHeaders: false,
     message: 'Too many registration attempts from this IP, please try again after 15 minutes',
 });
-app.use('/register', registrationLimiter);
+app.use('/api/register', registrationLimiter);
 
 // Replace with your MongoDB Atlas connection string
 const MONGO_URI = process.env.MONGO_URI;
+
+console.log("DEBUG: The value of MONGO_URI is:", MONGO_URI);
 
 // Connect to MongoDB Atlas
 mongoose.connect(MONGO_URI)
@@ -45,7 +47,7 @@ const registrationSchema = new mongoose.Schema({
         name: { type: String, required: true },
         studentId: { type: String, required: true },
     }],
-    transactionId: { type: String, required: true, unique },
+    transactionId: { type: String, required: true, unique: true},
     registeredAt: { type: Date, default: Date.now }
 });
 
@@ -80,6 +82,10 @@ app.post('/api/check-duplicates', async (req, res) => {
     }
 });
 
+app.get("/", (req, res) => {
+    res.send("Backend is running ✅");
+});
+
 
 app.post('/api/register', async (req, res) => {
     try {
@@ -99,5 +105,10 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
+app.get("/ping", (req, res) => {
+    console.log("✅ Ping route hit");
+    res.json({ message: "Server is alive!" });
+});
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
