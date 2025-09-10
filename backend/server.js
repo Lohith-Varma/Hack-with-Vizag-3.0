@@ -1,13 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const Razorpay = require("razorpay");
-const crypto = require("crypto");
 const rateLimit = require("express-rate-limit");
+require('dotenv').config(); //for loading environment variables from .env file
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+if(!process.env.mongo_URI) {
+    console.error("❌ MONGO_URI is not set in the .env file.");
+    process.exit(1);
+}      
 
 const registrationLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, //15minutes
@@ -19,12 +23,14 @@ const registrationLimiter = rateLimit({
 app.use('/register', registrationLimiter);
 
 // Replace with your MongoDB Atlas connection string
-const mongoURI = "mongodb+srv://siddu_0426:lohith2006@hackathoncluster.k1xp9kp.mongodb.net/hackathon?retryWrites=true&w=majority&appName=HackathonCluster"; 
+const MONGO_URI = process.env.MONGO_URI;
 
 // Connect to MongoDB Atlas
-mongoose.connect(mongoURI)
+mongoose.connect(MONGO_URI)
     .then(() => console.log("✅ Connected to MongoDB"))
     .catch(err => console.log("❌ MongoDB connection error:", err));
+
+
 
 // Define the Registration Schema
 const registrationSchema = new mongoose.Schema({
@@ -39,19 +45,18 @@ const registrationSchema = new mongoose.Schema({
         name: { type: String, required: true },
         studentId: { type: String, required: true },
     }],
-    paymentId: { type: String, required: true },
+    transactionId: { type: String, required: true, unique },
     registeredAt: { type: Date, default: Date.now }
 });
 
 const Registration = mongoose.model("Registration", registrationSchema);
 
-app.get("/ping", (req, res) => {
-    console.log("✅ Ping route was hit!");
-    res.json({ message: "Pong! The server is alive." });
-})
+// app.get("/ping", (req, res) => {
+//     console.log("✅ Ping route was hit!");
+//     res.json({ message: "Pong! The server is alive." });
+// })
 
-
-// API Endpoint to check for duplicates
+// API Endpoint to check for duplicates before final submission
 app.post('/api/check-duplicates', async (req, res) => {
     try {
         const { teamName, leaderEmail, leaderPhone, leaderStudentId } = req.body;
@@ -75,18 +80,24 @@ app.post('/api/check-duplicates', async (req, res) => {
     }
 });
 
-// API Endpoint to save registration data
+
 app.post('/api/register', async (req, res) => {
     try {
         const newRegistration = new Registration(req.body);
         await newRegistration.save();
-        res.status(201).json({ success: true, message: 'Registration successful!' });
+        res.status(201).json({ success: true, message: 'Registration successful! Your submission is pending verification.' });
     } catch (error) {
+        if (error.code === 11000) {
+            const duplicateField = Object.keys(error.keyValue)[0];
+            const message = duplicateField === 'transactionId'
+                ? 'This Transaction ID has already been used.'
+                : `A team with this ${duplicateField} is already registered.`;
+            return res.status(409).json({ success: false, message });
+        }
         console.error('Error saving registration:', error);
-        res.status(500).json({ success: false, message: 'Failed to save registration.' });
+        res.status(500).json({ success: false, message: 'Failed to save registration due to a server error.' });
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
