@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hack With Vizag 3.0 - Registration</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-      <div class="registration-section" id="registration-section">
+    <div class="registration-section" id="registration-section">
         <h1>Registration Form</h1>
         <div id="loading-message" style="display:none; text-align: center; margin: 15px; font-weight: bold;"></div>
-
 
         <form id="registration-form">
             <div id="team-details" class="form-section active">
@@ -37,7 +37,7 @@
                 <input type="text" id="team-leader-student-id" name="team-leader-student-id" required>
 
                 <label for="team-leader-email">Email ID:</label>
-                <input type="text" id="team-leader-email" name="team-leader-email" required>
+                <input type="email" id="team-leader-email" name="team-leader-email" required>
 
                 <label for="team-leader-phone-number">Phone Number:</label>
                 <input type="tel" id="team-leader-phone-number" name="team-leader-phone-number" required>
@@ -56,8 +56,8 @@
                         1. Scan the QR code below to pay the registration fee. <br>
                         2. Enter the <strong>UPI Transaction ID</strong> from your payment app in the field below.
                     </p>
-                    <img src="" alt="Payment QR Code" id="qr-code-image">
-                    
+                    <img src="https://placehold.co/250x250/F2CC8F/333?text=QR+Code" alt="Payment QR Code" id="qr-code-image">
+
                     <label for="transaction-id">UPI Transaction ID:</label>
                     <input type="text" id="transactionId" name="transaction-id" placeholder="Enter your 12-digit UPI reference number" required>
                 </div>
@@ -65,20 +65,17 @@
                 <button type="button" id="register-button">Submit Registration</button>
             </div>
 
-
-
             <div id="button-container">
                 <button type="button" id="previous-button">Previous</button>
                 <button type="button" id="next-button">Next</button>
             </div>
 
-             <div id="responseMessage" class="response-message"></div>
+            <div id="responseMessage" class="response-message"></div>
         </form>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-             // --- Step 1: DOM Element Selection ---
+<script>
+        // --- Step 1: DOM Element Selection ---
     const sections = document.querySelectorAll('.form-section');
     const prevBtn = document.getElementById('previous-button');
     const nextBtn = document.getElementById('next-button');
@@ -87,7 +84,7 @@
     const memberFieldsDiv = document.getElementById('member-fields');
     const form = document.getElementById('registration-form');
     const summaryDiv = document.getElementById('summary');
-// You may need to add this to your HTML: <div id="loading-message" style="display:none;">Loading...</div>
+    // You may need to add this to your HTML: <div id="loading-message" style="display:none;">Loading...</div>
     const loadingMessage = document.getElementById('loading-message'); 
     const responseMessage = document.getElementById('responseMessage');
     const transactionId = document.getElementById('transactionId');
@@ -96,16 +93,16 @@
 
     const API_BASE = 'http://localhost:3000';
 
-// --- Step 2: Section Navigation Logic ---
-const showSection = (index) => {
-    sections.forEach(section => 
-        section.classList.remove('active')
-    );
-    sections[index].classList.add('active');
-    prevBtn.style.display = index === 0 ? 'none' : 'block';
-    nextBtn.style.display = index === sections.length - 1 ? 'none' : 'block';
-    document.getElementById('button-container').style.display = index === sections.length -1 ? 'none' : 'flex';
-};
+    // --- Step 2: Section Navigation Logic ---
+    const showSection = (index) => {
+        sections.forEach(section => 
+            section.classList.remove('active')
+        );
+        sections[index].classList.add('active');
+        prevBtn.style.display = index === 0 ? 'none' : 'block';
+        nextBtn.style.display = index === sections.length - 1 ? 'none' : 'block';
+        document.getElementById('button-container').style.display = index === sections.length -1 ? 'none' : 'flex';
+    };
 
 // --- Step 3: Dynamic Team Member Fields Generation ---
 const generateMemberFields = () => {
@@ -120,7 +117,7 @@ const generateMemberFields = () => {
             <label for="member-${i + 1}-student-id">Student ID:</label>
             <input type="text" id="member-${i + 1}-student-id" name="member-${i + 1}-student-id" required>
         `;
-        // memberDiv.classList.add('member-field-group');
+        memberDiv.classList.add('member-field-group');
         memberFieldsDiv.appendChild(memberDiv);
     }
 };
@@ -132,7 +129,6 @@ const validateCurrentSection = () => {
     for (const input of inputs) {
         if (!input.value.trim()) {
             responseMessage.textContent = 'Please fill out all required fields.';
-            responseMessage.style.color = 'red';
             input.focus();
             return false;
         }
@@ -144,115 +140,118 @@ const validateCurrentSection = () => {
 const validateUniqueKeys = () => {
     const leaderStudentId = document.getElementById('team-leader-student-id').value.trim();
     const memberStudentIds = [];
-    if(leaderStudentId) memberStudentIds.push(leaderStudentId);
-
     const teamSize = parseInt(teamSizeSelect.value);
+
     for (let i = 0; i < teamSize - 1; i++) {
         const memberId = document.getElementById(`member-${i + 1}-student-id`).value.trim();
-        if (memberId) memberStudentIds.push(memberId);
+         memberStudentIds.push({
+            name: document.getElementById(`member-${i + 1}-name`).value.trim(),
+            studentId: document.getElementById(`member-${i + 1}-student-id`).value.trim()
+        });
     }
 
-    // if (leaderStudentId !== '' && memberStudentIds.includes(leaderStudentId)) {
-    //     alert("The Team Leaders Student ID is duplicated by a Team Members ID. Please ensure all IDs are unique.")
-    //     return false;
-    // }
+    if (leaderStudentId !== '' && memberStudentIds.includes(leaderStudentId)) {
+        alert("The Team Leaders Student ID is duplicated by a Team Members ID. Please ensure all IDs are unique.")
+        return false;
+    }
 
     const uniqueMemberIds = new Set(memberStudentIds);
     if (uniqueMemberIds.size !== memberStudentIds.length) {
-        // alert("Duplicate Student IDs found among team members. Please ensure all IDs are unique.");
-        responseMessage.textContent = 'Duplicate Student IDs found among team members. Please ensure all IDs are unique.';
-        responseMessage.style.color = 'red';
+        alert("Duplicate Student IDs found among team members. Please ensure all IDs are unique.");
         return false;
     }
     return true;
 };
 
-const collectFormData = () => {
-    const formData = {
-        teamName: document.getElementById('team-name').value,
-        collegeName: document.getElementById('college-name').value,
-        teamSize: parseInt(teamSizeSelect.value),
-        leaderName: document.getElementById('team-leader-name').value,
-        leaderEmail: document.getElementById('team-leader-email').value,
-        leaderPhone: document.getElementById('team-leader-phone-number').value,
-        leaderStudentId: document.getElementById('team-leader-student-id').value,
-        teamMembers: []
+    const collectFormData = () => {
+        const formData = {
+            teamName: document.getElementById('team-name').value,
+            collegeName: document.getElementById('college-name').value,
+            teamSize: parseInt(teamSizeSelect.value),
+            leaderName: document.getElementById('team-leader-name').value,
+            leaderEmail: document.getElementById('team-leader-email').value,
+            leaderPhone: document.getElementById('team-leader-phone-number').value,
+            leaderStudentId: document.getElementById('team-leader-student-id').value,
+            teamMembers: []
+        };
+        const teamSize = parseInt(teamSizeSelect.value);
+        for (let i = 0; i < teamSize - 1; i++) {
+            formData.teamMembers.push({
+                name: document.getElementById(`member-${i + 1}-name`).value,
+                studentId: document.getElementById(`member-${i + 1}-student-id`).value
+            });
+        }
+        return formData;
     };
-    const teamSize = parseInt(teamSizeSelect.value);
-    for (let i = 0; i < teamSize - 1; i++) {
-        formData.teamMembers.push({
-            name: document.getElementById(`member-${i + 1}-name`).value,
-            studentId: document.getElementById(`member-${i + 1}-student-id`).value
-        });
-    }
-    return formData;
-};
 
-const displaySummary = () => {
-    const formData = collectFormData();
-    const qrImage = document.getElementById('qr-code-image');
-    const amount = formData.teamSize * 400;
-    const summaryHtml = `
-        <h3>Team Information</h3>
-        <p><strong>Team Name:</strong> ${formData.teamName}</p>
-        <p><strong>College:</strong> ${formData.collegeName}</p>
-        <p><strong>Team Size:</strong> ${formData.teamSize}</p>
-        <h3>Team Leader</h3>
-        <p><strong>Name:</strong> ${formData.leaderName}</p>
-        <p><strong>Email:</strong> ${formData.leaderEmail}</p>
-        <p><strong>Phone:</strong> ${formData.leaderPhone}</p>
-        <p><strong>Student ID:</strong> ${formData.leaderStudentId}</p>
-        <h3>Team Members</h3>
-        <ul>
-            ${formData.teamMembers.map(member => `
-                <li><strong>Name:</strong> ${member.name}, <strong>Student ID:</strong> ${member.studentId}</li>
-            `).join('')}
-        </ul>
-        <h3>Registration Fee</h3>
-        <p><strong>Total Amount:</strong> ₹${formData.teamSize * 400}</p>
-    `;
+    const displaySummary = () => {
+        const formData = collectFormData();
+        const qrImage = document.getElementById('qr-code-image');
+        const amount = formData.teamSize * 400;
+        const summaryHtml = `
+            <h3>Team Information</h3>
+            <p><strong>Team Name:</strong> ${formData.teamName}</p>
+            <p><strong>College:</strong> ${formData.collegeName}</p>
+            <p><strong>Team Size:</strong> ${formData.teamSize}</p>
+            <hr>
+            <h3>Team Leader</h3>
+            <p><strong>Name:</strong> ${formData.leaderName}</p>
+            <p><strong>Email:</strong> ${formData.leaderEmail}</p>
+            <p><strong>Phone:</strong> ${formData.leaderPhone}</p>
+            <p><strong>Student ID:</strong> ${formData.leaderStudentId}</p>
+            <hr>
+            <h3>Team Members</h3>
+            <ul>
+                ${formData.teamMembers.map(member => `
+                    <li><strong>Name:</strong> ${member.name}, <strong>Student ID:</strong> ${member.studentId}</li>
+                `).join('')}
+            </ul>
+            <hr>
+            <h3>Registration Fee</h3>
+            <p><strong>Total Amount:</strong> ₹${formData.teamSize * 400}</p>
+        `;
 
-     if (formData.teamSize === 3) {
-                qrImage.src = 'assets/UPI_1200.jpg';   
-            } else {
-                qrImage.src = 'assets/UPI_1600.jpg';
+        if (formData.teamSize === 3) {
+                    qrImage.src = 'assets/UPI_1200.jpg';   
+                } else {
+                    qrImage.src = 'assets/UPI_1600.jpg';
+                }
+        summaryDiv.innerHTML = summaryHtml;
+    };
+
+
+
+
+    // --- Step 5: Main Event Listeners and Logic ---
+    nextBtn.addEventListener('click', async () => {
+        if (validateCurrentSection()) {
+            if (currentSectionIndex === 1 || currentSectionIndex === 2) {
+                if (!validateUniqueKeys()) {
+                    return;
+                }
             }
-    summaryDiv.innerHTML = summaryHtml;
-};
-
-
-
-
-// --- Step 5: Main Event Listeners and Logic ---
-nextBtn.addEventListener('click', async () => {
-    if (validateCurrentSection()) {
-        if (currentSectionIndex === 1 || currentSectionIndex === 2) {
-            if (!validateUniqueKeys()) {
-                return;
+            
+            if (currentSectionIndex < sections.length - 1) {
+                currentSectionIndex++;
+                if (currentSectionIndex === sections.length - 1) {
+                    displaySummary();
+                }
+                showSection(currentSectionIndex);
             }
         }
-        
-        if (currentSectionIndex < sections.length - 1) {
-            currentSectionIndex++;
-            if (currentSectionIndex === sections.length - 1) {
-                displaySummary();
-            }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentSectionIndex > 0) {
+            currentSectionIndex--;
             showSection(currentSectionIndex);
         }
-    }
-});
-
-prevBtn.addEventListener('click', () => {
-    if (currentSectionIndex > 0) {
-        currentSectionIndex--;
-        showSection(currentSectionIndex);
-    }
-});
+    });
 
 registerBtn.addEventListener('click', async () => {
-    const formData = collectFormData();
-    const transactionIdInput = document.getElementById('transactionId');
-    const amount = formData.teamSize * 400 * 100; // Amount in paise
+    // const formData = collectFormData();
+    const transactionIdInput = document.getElementById('transaction-id');
+    // const amount = formData.teamSize * 400 * 100; // Amount in paise
     if (!transactionIdInput.value.trim()) {
             responseMessage.textContent = 'Please enter the UPI Transaction ID.';
             responseMessage.style.color = 'red';
@@ -261,21 +260,19 @@ registerBtn.addEventListener('click', async () => {
     }
 
     const registrationData = collectFormData();
-    registrationData.transactionId = transactionIdInput.value.trim();
-
     loadingMessage.textContent = 'Submitting registration...';
     loadingMessage.style.display = 'block';
     responseMessage.textContent = '';
     
     try {
-        const res = await fetch('http://localhost:5000/api/register', {
+        const res = await fetch('/api/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(registrationData)
         });
         const data = await res.json();
 
-         if (res.ok) {
+         if (data.success) {
                     loadingMessage.style.display = 'none';
                     form.style.display = 'none';
                     responseMessage.style.color = 'green';
@@ -287,7 +284,7 @@ registerBtn.addEventListener('click', async () => {
     }
     catch(err) {
         responseMessage.textContent = 'A network error occurred. Please try again.';
-        responseMessage.style.color = 'red';
+        responseMessage.textContent = 'red';
         console.error("Submission Error: ", err);
     } finally {
         loadingMessage.style.display = 'none';
@@ -299,7 +296,6 @@ generateMemberFields();
 // Show the first section of the form
 showSection(currentSectionIndex);
 teamSizeSelect.addEventListener('change', generateMemberFields);
-        });
     </script>
 </body>
 </html>

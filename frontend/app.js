@@ -1,10 +1,20 @@
+const menuToggle = document.getElementById("menu-toggle");
+const navbar = document.getElementById("navbar");
+const navLinks = navbar.querySelectorAll("a");
 
-  const menuToggle = document.getElementById('menu-toggle');
-  const navbar = document.getElementById('navbar');
+// Toggle open/close on button click
+menuToggle.addEventListener("click", () => {
+  navbar.classList.toggle("active");
+});
 
-  menuToggle.addEventListener('click', () => {
-    navbar.classList.toggle('active');
+// Close menu when clicking a link
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    navbar.classList.remove("active");
   });
+});
+
+
 
 
 // ===============================================================================================================
@@ -334,4 +344,200 @@ const faqItems = faqComponent.querySelectorAll('.faq-item');
 // // Show the first section of the form
 // showSection(currentSectionIndex);
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll('.form-section');
+  const prevBtn = document.getElementById('previous-button');
+  const nextBtn = document.getElementById('next-button');
+  const registerBtn = document.getElementById('register-button');
+  const teamSizeSelect = document.getElementById('team-size');
+  const memberFieldsDiv = document.getElementById('member-fields');
+  const form = document.getElementById('registration-form');
+  const summaryDiv = document.getElementById('summary');
+  const loadingMessage = document.getElementById('loading-message');
+  const responseMessage = document.getElementById('responseMessage');
+
+  let currentSectionIndex = 0;
+
+  // Change this if you serve backend from a different host/port.
+  // If you serve frontend from the backend (Option B), you can set API_BASE = '' and fetch('/api/register') will work.
+  const API_BASE = 'http://localhost:5000';
+
+  const showSection = (index) => {
+    sections.forEach(section => section.classList.remove('active'));
+    sections[index].classList.add('active');
+    prevBtn.style.display = index === 0 ? 'none' : 'block';
+    nextBtn.style.display = index === sections.length - 1 ? 'none' : 'block';
+    document.getElementById('button-container').style.display = index === sections.length -1 ? 'none' : 'flex';
+  };
+
+  const generateMemberFields = () => {
+    const teamSize = parseInt(teamSizeSelect.value);
+    memberFieldsDiv.innerHTML = '';
+    for (let i = 0; i < teamSize - 1; i++) {
+      const memberDiv = document.createElement('div');
+      memberDiv.innerHTML = `
+        <h3>Member ${i + 1}</h3>
+        <label for="member-${i + 1}-name">Name:</label>
+        <input type="text" id="member-${i + 1}-name" name="member-${i + 1}-name" required>
+        <label for="member-${i + 1}-student-id">Student ID:</label>
+        <input type="text" id="member-${i + 1}-student-id" name="member-${i + 1}-student-id" required>
+      `;
+      memberFieldsDiv.appendChild(memberDiv);
+    }
+  };
+
+  const validateCurrentSection = () => {
+    const currentSection = sections[currentSectionIndex];
+    const inputs = currentSection.querySelectorAll('input[required], select[required]');
+    for (const input of inputs) {
+      if (!input.value.trim()) {
+        responseMessage.textContent = 'Please fill out all required fields.';
+        responseMessage.style.color = 'red';
+        input.focus();
+        return false;
+      }
+    }
+    responseMessage.textContent = '';
+    return true;
+  };
+
+  const validateUniqueKeys = () => {
+    const leaderStudentId = document.getElementById('team-leader-student-id').value.trim();
+    const memberStudentIds = [];
+    if (leaderStudentId) memberStudentIds.push(leaderStudentId);
+
+    const teamSize = parseInt(teamSizeSelect.value);
+    for (let i = 0; i < teamSize - 1; i++) {
+      const memberId = document.getElementById(`member-${i + 1}-student-id`).value.trim();
+      if (memberId) memberStudentIds.push(memberId);
+    }
+
+    const uniqueMemberIds = new Set(memberStudentIds);
+    if (uniqueMemberIds.size !== memberStudentIds.length) {
+      responseMessage.textContent = 'Duplicate Student IDs found among team members. Please ensure all IDs are unique.';
+      responseMessage.style.color = 'red';
+      return false;
+    }
+    return true;
+  };
+
+  const collectFormData = () => {
+    const formData = {
+      teamName: document.getElementById('team-name').value.trim(),
+      collegeName: document.getElementById('college-name').value.trim(),
+      teamSize: parseInt(teamSizeSelect.value),
+      leaderName: document.getElementById('team-leader-name').value.trim(),
+      leaderEmail: document.getElementById('team-leader-email').value.trim(),
+      leaderPhone: document.getElementById('team-leader-phone-number').value.trim(),
+      leaderStudentId: document.getElementById('team-leader-student-id').value.trim(),
+      teamMembers: []
+    };
+    const teamSize = parseInt(teamSizeSelect.value);
+    for (let i = 0; i < teamSize - 1; i++) {
+      formData.teamMembers.push({
+        name: document.getElementById(`member-${i + 1}-name`).value.trim(),
+        studentId: document.getElementById(`member-${i + 1}-student-id`).value.trim()
+      });
+    }
+    return formData;
+  };
+
+  const displaySummary = () => {
+    const formData = collectFormData();
+    const qrImage = document.getElementById('qr-code-image');
+    const summaryHtml = `
+      <h3>Team Information</h3>
+      <p><strong>Team Name:</strong> ${formData.teamName}</p>
+      <p><strong>College:</strong> ${formData.collegeName}</p>
+      <p><strong>Team Size:</strong> ${formData.teamSize}</p>
+      <h3>Team Leader</h3>
+      <p><strong>Name:</strong> ${formData.leaderName}</p>
+      <p><strong>Email:</strong> ${formData.leaderEmail}</p>
+      <p><strong>Phone:</strong> ${formData.leaderPhone}</p>
+      <p><strong>Student ID:</strong> ${formData.leaderStudentId}</p>
+      <h3>Team Members</h3>
+      <ul>
+        ${formData.teamMembers.map(member => `<li><strong>Name:</strong> ${member.name}, <strong>Student ID:</strong> ${member.studentId}</li>`).join('')}
+      </ul>
+      <h3>Registration Fee</h3>
+      <p><strong>Total Amount:</strong> ₹${formData.teamSize * 400}</p>
+    `;
+    // set qr image by team size if you have two images
+    if (formData.teamSize === 3) {
+      qrImage.src = 'assets/UPI_1200.jpg';
+    } else {
+      qrImage.src = 'assets/UPI_1600.jpg';
+    }
+    summaryDiv.innerHTML = summaryHtml;
+  };
+
+  nextBtn.addEventListener('click', () => {
+    if (validateCurrentSection()) {
+      if ((currentSectionIndex === 1 || currentSectionIndex === 2) && !validateUniqueKeys()) {
+        return;
+      }
+      if (currentSectionIndex < sections.length - 1) {
+        currentSectionIndex++;
+        if (currentSectionIndex === sections.length - 1) displaySummary();
+        showSection(currentSectionIndex);
+      }
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentSectionIndex > 0) {
+      currentSectionIndex--;
+      showSection(currentSectionIndex);
+    }
+  });
+
+  registerBtn.addEventListener('click', async () => {
+    const formData = collectFormData();
+    const transactionIdInput = document.getElementById('transactionId');
+    if (!transactionIdInput.value.trim()) {
+      responseMessage.textContent = 'Please enter the UPI Transaction ID.';
+      responseMessage.style.color = 'red';
+      transactionIdInput.focus();
+      return;
+    }
+    formData.transactionId = transactionIdInput.value.trim();
+
+    loadingMessage.textContent = 'Submitting registration...';
+    loadingMessage.style.display = 'block';
+    responseMessage.textContent = '';
+
+    try {
+      const res = await fetch(`${API_BASE}/api/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        loadingMessage.style.display = 'none';
+        form.style.display = 'none';
+        responseMessage.style.color = 'green';
+        responseMessage.innerHTML = `<h2>Registration Successful!</h2><p>${data.message}</p><p>You can now close this page.</p>`;
+      } else {
+        responseMessage.textContent = `Error: ${data.message || 'Something went wrong'}`;
+        responseMessage.style.color = 'red';
+      }
+    } catch (err) {
+      console.error('Submission Error: ', err);
+      responseMessage.textContent = 'A network error occurred. Please try again.';
+      responseMessage.style.color = 'red';
+    } finally {
+      loadingMessage.style.display = 'none';
+    }
+  });
+
+  // init
+  generateMemberFields();
+  showSection(currentSectionIndex);
+  teamSizeSelect.addEventListener('change', generateMemberFields);
+});
 

@@ -29,7 +29,7 @@
             <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#themes">Themes</a></li>
-            <li><a href="#schedule">Schedule</a></li>
+            <!-- <li><a href="#schedule">Schedule</a></li>   -->
             <li><a href="#prizes">Prizes</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -66,7 +66,7 @@ Hero Section
             <p class="p-1" id="typing-text"></p>
         </div>
 
-        <a href="registration.html" class="register-btn">Register Now</a>
+        <a href="#registration-section" class="register-btn">Register Now</a>
 
         <div id="countdown">
         <h3>Event starts in</h3>
@@ -276,7 +276,7 @@ Prizes
     Schedule Section
 ====================================================================================== -->
 
-    <section class="schedule" id="schedule">
+    <!-- <section class="schedule" id="schedule">
   <div class="schedule-container">
     <h2>Event Schedule</h2>
     <div class="timeline">
@@ -330,7 +330,7 @@ Prizes
     </div>
   </div>
 </section>
-
+ -->
 
 
 
@@ -398,6 +398,80 @@ Registration Form
         </form>
 
     </div> -->
+
+
+
+<div class="registration-section" id="registration-section">
+        <h1>Registration Form</h1>
+        <div id="loading-message" style="display:none; text-align: center; margin: 15px; font-weight: bold;"></div>
+
+        <form id="registration-form">
+            <div id="team-details" class="form-section active">
+                <h2>Team Details</h2>
+                <label for="team-name">Team Name:</label>
+                <input type="text" id="team-name" name="team-name" required>
+
+                <label for="college-name">College Name:</label>
+                <input type="text" id="college-name" name="college-name" required>
+
+                <label for="team-size">Team Size:</label>
+                <select id="team-size" name="team-size">
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+
+            <div id="team-leader-details" class="form-section">
+                <h2>Team Leader Details</h2>
+                <label for="team-leader-name">Name:</label>
+                <input type="text" id="team-leader-name" name="team-leader-name" required>
+
+                <label for="team-leader-student-id">Student ID:</label>
+                <input type="text" id="team-leader-student-id" name="team-leader-student-id" required>
+
+                <label for="team-leader-email">Email ID:</label>
+                <input type="email" id="team-leader-email" name="team-leader-email" required>
+
+                <label for="team-leader-phone-number">Phone Number:</label>
+                <input type="tel" id="team-leader-phone-number" name="team-leader-phone-number" required>
+            </div>
+
+            <div id="team-member-details" class="form-section">
+                <h2>Team Member Details</h2>
+                <div id="member-fields"></div>
+            </div>
+
+            <div id="registration-conformation" class="form-section">
+                <h3>Confirm Details & Complete Payment</h3>
+                <div id="summary"></div>
+                <div class="qr-payment-section">
+                    <p class="payment-instructions">
+                        1. Scan the QR code below to pay the registration fee. <br>
+                        2. Enter the <strong>UPI Transaction ID</strong> from your payment app in the field below.
+                    </p>
+                    <img src="https://placehold.co/250x250/F2CC8F/333?text=QR+Code" alt="Payment QR Code" id="qr-code-image">
+
+                    <label for="transaction-id">UPI Transaction ID:</label>
+                    <input type="text" id="transaction-id" name="transaction-id" placeholder="Enter your 12-digit UPI reference number" required>
+                </div>
+
+                <button type="button" id="register-button">Submit Registration</button>
+            </div>
+
+            <div id="button-container">
+                <button type="button" id="previous-button">Previous</button>
+                <button type="button" id="next-button">Next</button>
+            </div>
+
+            <div id="responseMessage" class="response-message"></div>
+        </form>
+    </div>
+
+
+
+
+
+
 
     
 <!-- ======================================================================================

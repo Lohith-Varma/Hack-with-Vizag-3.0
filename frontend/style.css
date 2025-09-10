@@ -1,7 +1,7 @@
 body {
     font-family: sans-serif;
     box-sizing: border-box;
-    margin: 0;
+    /* margin: 0; */
     color: #000000;
     /* background: url(../frontend/assets/hackwithvizag.jpg); */
     /* background-image: url(../frontend/assets/vizag.jpg); */
@@ -12,16 +12,19 @@ body {
     background-attachment:fixed;
     background-blend-mode: darken;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
     }
 
-  header {
+
+    header {
   position: sticky;
   top: 0;
   background: linear-gradient(90deg, #582f0e, #936639, #d5bdaf);
-  padding: 15px 50px;
+  padding: 15px 20px;
   display: flex;
   align-items: center;
-  /* justify-content: flex-start; */
   z-index: 1000;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
@@ -33,8 +36,89 @@ body {
   justify-content: center;
   gap: 12px;
   width: 100%;
-
 }
+
+.logo-section .head-img img {
+  margin: auto;
+  width: 150px;
+  height: auto;
+  display: block;
+}
+
+.logo-section span {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.main-head {
+  display: flex;
+  align-items: center;
+  gap: 420px;
+}
+
+/* Menu toggle button */
+.menu-toggle {
+  display: none;
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* Nav links */
+#navbar {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+nav ul li a {
+  display: inline-block;
+  text-decoration: none;
+  color: #e0e0e0;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav ul li a:hover {
+  color: #4fc3f7;
+  transform: scale(1.1);
+  text-shadow: 0 4px 20px rgba(255, 255, 255, 1);
+}
+
+/* Register button */
+.register-button {
+  padding: 8px 18px;
+  background: #333d29;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.register-button:hover {
+  background: #656d4a;
+  color: white;
+  transform: scale(1.1);
+}
+
+
+
+
+
+
+
 
     @keyframes slideUpFadeIn {
 
@@ -86,93 +170,6 @@ body {
 }
 
 
-/* .logo-section img {
-  height: 55px;
-  width: auto;
-  /* margin: auto; */
-  /* width: 45px; */
-  /* object-fit: contain;  
-} */
-.logo-section .head-img img{
-  margin: auto;
-  width: 180px;
-  height: auto;
-  display: block;
-} 
-.head-img img{
-  margin: auto;
-  display: block;
-}
-
-.logo-section span {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 1px;
-}
-.main-head{
-  display: flex;
-  align-items: center;
-  /* justify-content:space-around; */
-  gap: 420px;
-}
-
-/* Menu toggle button */
-.menu-toggle {
-  display: none;
-  margin-left: auto;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  color: white;
-  cursor: pointer;
-}
-
-/* Nav links */
-#navbar {
-  display: flex;
-  margin-left: auto;
-  align-items: center;
-  justify-content: center;
-
-}
-
-nav ul {
-  display: flex;
-  gap: 25px;
-  list-style: none;
-}
-
-nav ul li a {
-  display: inline-block;
-  text-decoration: none;
-  color: #e0e0e0;
-  font-weight: 500;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-nav ul li a:hover {
-  color: #4fc3f7;
-  transform: scale(1.1);
-  text-shadow: 0 4px 20px rgba(255, 255, 255, 1);
-}
-
-/* Register button */
-.register-button {
-  /* display: inline-block; */
-  padding: 8px 18px;
-  background: #333d29;
-  color: #ffffff;
-  font-weight: 600;
-  border-radius: 6px;
-  transition: 0.3s;
-}
-
-.register-button:hover {
-  background: #656d4a;
-  color: white;
-  transform: scale(1.1);
-}
 
     /* Hero Section */
 .hero {
@@ -774,7 +771,36 @@ min-height: 100vh;
     min-height: 25px;
 }
 
+#register-button {
+  display: flex;
+  margin: auto;
+  margin-top: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  border-radius: 10px;
+  border: none;
+  background-color: #007bff;
+}
 
+#register-button:hover {
+  cursor: pointer;
+  background-color: #0056b3;
+}
+
+
+#qr-code-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto   ;
+  width: 75%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+  margin-bottom: 18px;
+}
 
 
 
@@ -1056,6 +1082,220 @@ min-height: 100vh;
 
     
 
+@media (min-width: 320px) and (max-width: 370px) {
+  body {
+      padding: 5px; /* Even less padding for very small screens */
+  }
+
+  .registration-section {
+      width: 95%; 
+      margin-top: 15px;
+      padding: 5px 0;
+      box-shadow: none; 
+  }
+
+  #registration-form {
+      width: 80%; /* Use more of the screen width */
+      padding: 1rem; /* Reduce padding slightly more */
+      margin: 10px auto;
+  }
+
+  .registration-section h1 {
+      font-size: 1.6rem; /* Smaller title to prevent wrapping */
+      text-align: center;
+  }
+
+  .form-section, .form-section.active {
+    width: 78%;
+  }
+
+  .registration-section h2 {
+      font-size: 1.3rem; /* Smaller section titles */
+  }
+
+  #button-container button {
+      padding: 10px 14px; /* Adjust button padding */
+      font-size: 15px;
+  }
+
+  #register-button {
+      padding: 12px 20px;
+  }
+
+  #qr-code-image {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+      align-items: center;
+      width: 90%; /* Make QR code larger for easy scanning */
+  }
+  }
 
 
+  /* --- Styles for Larger Mobile Phones (e.g., iPhone 12/13/14) --- */
+  /* These styles will apply ONLY to screens between 371px and 425px wide */
+  @media (min-width: 371px) and (max-width: 425px) {
+  body {
+      padding: 10px; /* Reduce padding on the body for more space */
+  }
+
+  .registration-section {
+      width: 95%; /* Make the main container use the full screen width */
+      margin-top: 20px; /* Reduce the top margin */
+      padding: 10px 0;
+      box-shadow: none; /* Remove outer shadow for a cleaner mobile look */
+  }
+
+  #registration-form {
+      width: auto; /* Make the form itself almost full-width */
+      padding: 1rem; /* Reduce padding inside the form */
+      margin: 10px auto;
+  }
+
+  .registration-section h1 {
+      font-size: 1.8rem; /* Slightly smaller main title */
+  }
+
+  .registration-section h2 {
+      font-size: 1.4rem; /* Slightly smaller section titles */
+  }
+
+  /* Adjust button padding for smaller screens */
+  #button-container button {
+      padding: 12px 18px;
+  }
+
+    /* Make the register button and QR code slightly bigger for better usability */
+  #register-button {
+      padding: 14px 24px;
+  }
+
+  .form-section, .form-section.active {
+    width: 90%;
+    margin: auto;  
+  }
+
+  #registration-conformation {
+    width: auto;
+  }
+
+  #qr-code-image {
+      width: 85%; /* QR code can be a bit larger to make it easier to scan */
+  }
+}
+
+
+
+
+/* ========================= */
+/* ✅ Responsive Styles */
+/* ========================= */
+@media (max-width: 426px) {
+  .main-head {
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .logo-section span {
+    font-size: 1.1rem; /* smaller text */
+  }
+
+  .logo-section .head-img img {
+    width: 120px; /* shrink logo */
+  }
+
+  /* Show menu button */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Hide nav by default */
+  #navbar {
+    display: none; /* hidden initially */
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: #582f0e;
+    width: 100%;
+    max-width: 280px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  /* Vertical menu items */
+  #navbar ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  #navbar ul li {
+    width: 100%;
+  }
+
+  #navbar ul li a {
+    font-size: 1rem;
+    width: 100%;
+    display: block;
+    padding: 10px 0;
+    color: #fff;
+  }
+
+  /* Show when active */
+  #navbar.active {
+    display: flex;
+  }
+
+  .register-button {
+    display: block;
+    width: 80%;
+    text-align: center;
+    background: #333d29;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 5px;
+  }
+
+  .register-button:hover {
+    background: #656d4a;
+    transform: none; /* remove zoom effect on small screens */
+  }
+}
+
+/* ========================= */
+/* ✅ Extra small devices (<=360px) */
+/* ========================= */
+@media (max-width: 360px) {
+  .logo-section span {
+    font-size: 0.95rem; /* even smaller title */
+  }
+
+  .logo-section .head-img img {
+    width: 100px; /* smaller logo */
+  }
+
+  .menu-toggle {
+    font-size: 1.5rem; /* slightly smaller menu icon */
+  }
+
+  #navbar {
+    max-width: 240px; /* narrower menu */
+    padding: 10px 15px;
+  }
+
+  .register-button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  #navbar ul li a {
+    font-size: 0.9rem;
+    padding: 8px 0;
+  }
+}
 
