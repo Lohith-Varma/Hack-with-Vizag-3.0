@@ -95,14 +95,15 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
       email: leaderEmail,
       phone: leaderPhone,
     },
-    members: [
-      {name: member2Name, roll: member2Roll},
-      {name: member3Name, roll: member3Roll},
+    teamMembers: [
+      {name: member2Name, StudentId: member2Roll},
+      {name: member3Name, StudentId: member3Roll},
     ],
+    transactionId: document.getElementById("transactionId").value
   };
 
   if (member4Name && member4Roll) {
-      registrationData.members.push({ name: member4Name, roll: member4Roll });
+      registrationData.teamMembers.push({ name: member4Name, StudentId: member4Roll });
   }
 
   try{
