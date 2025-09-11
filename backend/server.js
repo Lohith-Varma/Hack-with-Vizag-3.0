@@ -26,7 +26,7 @@ const registrationLimiter = rateLimit({
 app.use('/api/register', registrationLimiter);
 
 // Replace with your MongoDB Atlas connection string
-const MONGO_URI = process.env.MONGO_URI;
+// const MONGO_URI = process.env.MONGO_URI;
 
 // --- CONNECTING TO MONGODB ---
 // const MONGO_URI = "mongodb+srv://siddu_0426:lohith2006@hackathoncluster.k1xp9kp.mongodb.net/hackathon?retryWrites=true&w=majority&appName=HackathonCluster";
