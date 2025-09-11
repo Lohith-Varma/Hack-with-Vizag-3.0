@@ -20,7 +20,7 @@ navLinks.forEach(link => {
 // Countdown
 // ===============================================================================================================
 
-const countdownDate = new Date("Sep 26, 2025 07:00:00").getTime();
+const countdownDate = new Date("Sep 26, 2025 09:00:00").getTime();
 
 const countdownFunction = setInterval(() => {
     const now = new Date().getTime();
@@ -48,7 +48,7 @@ const countdownFunction = setInterval(() => {
 // Hero Section Typing Effect
 // ===============================================================================================================
 
-const text = "Join the ultimate 36-hour coding marathon to solve real-world problems.";
+const text = "Join the ultimate 30-hour coding marathon to solve real-world problems.";
 const typingElement = document.getElementById("typing-text");
 let index = 0;
 
@@ -203,10 +203,31 @@ backToTopButton.addEventListener("click", function() {
 // FAQ Section
 // ===============================================================================================================
 
-const faqComponent = document.querySelector('.faq-container');
+// const faqComponent = document.querySelector('.faq-container');
+
+// if (faqComponent) {
+// const faqItems = faqComponent.querySelectorAll('.faq-item');
+
+//     faqItems.forEach(item => {
+//         const questionButton = item.querySelector('.faq-question');
+
+//         questionButton.addEventListener('click', () => {
+//             const currentlyActiveItem = faqComponent.querySelector('.faq-item.active');
+            
+//             if (currentlyActiveItem && currentlyActiveItem !== item) {
+//                 currentlyActiveItem.classList.remove('active');
+//             }
+//             item.classList.toggle('active');
+//         });
+//     });
+//   }
+
+
+
+  const faqComponent = document.querySelector('.faq-container');
 
 if (faqComponent) {
-const faqItems = faqComponent.querySelectorAll('.faq-item');
+    const faqItems = faqComponent.querySelectorAll('.faq-item');
 
     faqItems.forEach(item => {
         const questionButton = item.querySelector('.faq-question');
@@ -221,4 +242,3 @@ const faqItems = faqComponent.querySelectorAll('.faq-item');
         });
     });
 }
-
