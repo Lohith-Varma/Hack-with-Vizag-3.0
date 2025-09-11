@@ -45,7 +45,7 @@ const registrationSchema = new mongoose.Schema({
         name: { type: String, required: true },
         studentId: { type: String, required: true },
     }],
-    transactionId: { type: String, required: true, unique },
+    transactionId: { type: String, required: true, unique }, //updated schema
     registeredAt: { type: Date, default: Date.now }
 });
 
@@ -101,3 +101,4 @@ app.post('/api/register', async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+
