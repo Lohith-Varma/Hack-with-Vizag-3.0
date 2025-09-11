@@ -2,20 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
-require('dotenv').config(); //for loading environment variables from .env file
-const rateLimit = require('express-rate-limit');
-require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-if(!process.env.MONGO_URI) {
-    console.error("❌ MONGO_URI is not set in the .env file.");
-    process.exit(1);
-}      
-// const rateLimit = require('express-rate-limit');
-
+ 
 const registrationLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, //15minutes
     max: 10, // Limit each IP to 10 requests per windowMs
@@ -23,19 +14,24 @@ const registrationLimiter = rateLimit({
     legacyHeaders: false,
     message: 'Too many registration attempts from this IP, please try again after 15 minutes',
 });
-app.use('/api/register', registrationLimiter);
 
-// Replace with your MongoDB Atlas connection string
-// const MONGO_URI = process.env.MONGO_URI;
+app.use('/register', registrationLimiter);
+
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb){
+//         cb(null, 'uploads/');
+//     },
+//     filename: function (req, file, cb){
+//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//         cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+// }
+// })
+
+// const upload = multer({ storage: storage });
+
 
 // --- CONNECTING TO MONGODB ---
-// const MONGO_URI = "mongodb+srv://siddu_0426:lohith2006@hackathoncluster.k1xp9kp.mongodb.net/hackathon?retryWrites=true&w=majority&appName=HackathonCluster";
-
-const MONGO_URI = process.env.MONGO_URI;
-if (!MONGO_URI) {
-  console.error("❌ MONGO_URI not found in .env file");
-  process.exit(1);
-}
+const MONGO_URI = "mongodb+srv://siddu_0426:lohith2006@hackathoncluster.k1xp9kp.mongodb.net/hackathon?retryWrites=true&w=majority&appName=HackathonCluster";
 
 
 // Connect to MongoDB Atlas
@@ -67,21 +63,13 @@ const RegistrationSchema = new mongoose.Schema({
     //transaction id
     transactionId: { type: String, required: true, unique: true },
 
+    paymentProofLink: { type: String, required: true },
+
+    // paymentScreenshotPath: { type: String, required: true },  //to store the payment images
+
 }, { timestamps: true });
 
 const Registration = mongoose.model("Registration", RegistrationSchema);
-
-(async () => {
-    try {
-        await Registration.syncIndexes();
-        console.log("✅ Indexes synced with schema.");
-    } catch (err) {
-        console.error("❌ Failed to sync indexes:", err);
-    }
-})();
-
-
-// await Registration.syncIndexes(); 
 
 
 app.get("/ping", (req, res) => {
@@ -93,66 +81,73 @@ app.post("/register", async (req, res) => {
     try{
         console.log("Received registration request with body:", req.body);
 
-        const { teamName, collegeName, leader, teamMembers = [], transactionId } = req.body;
+        const { teamName, collegeName, leader, teamMembers = [], transactionId, driveLink} = req.body;
 
         if (!leader || !leader.name || !leader.roll || !leader.email || !leader.phone) {
             return res.status(400).json({ message: "Leader details are missing or incomplete." });
         }
 
-        console.log("DEBUG Incoming Request Body:", req.body);
+        if (!driveLink || driveLink.trim() === '') {
+            return res.status(400).json({ message: "Payment proof Google Drive link is required." });
+        }
 
-        const existingTeam = await Registration.findOne({
-            $or: [
-                { teamName },
-                { leaderEmail: leader.email },
-                { leaderPhone: leader.phone },
-                { leaderRoll: leader.roll },
-                { transactionId }
-            ]
-        });
+        console.log("DEBUG Incoming Request Body:", req.body);
 
         const allRollNumbers = [leader.roll, ...teamMembers.map(member => member.StudentId)];
 
-        const duplicateRoll = await Registration.findOne({
-        $or: [
-        { roll: { $in: allRollNumbers } }, // check against leader roll
-        { "teamMembers.StudentId": { $in: allRollNumbers } } // check against members roll
-        ]
-});
-if (duplicateRoll) {
-    return res.status(409).json({
-        message: "One or more roll numbers are already registered with another team."
-    });
-}
+        const existingRegistration = await Registration.findOne({
+            $or: [
+                { teamName: teamName },
+                { leaderEmail: leader.email },
+                { leaderPhone: leader.phone },
+                { leaderRoll: { $in: allRollNumbers } },
+                { transactionId: transactionId },
+                { "teamMembers.StudentId": { $in: allRollNumbers } }
+            ]
+        });
+
+        // const duplicateRoll = await Registration.findOne({
+        // $or: [
+        // { roll: { $in: allRollNumbers } }, // check against leader roll
+        // { "teamMembers.StudentId": { $in: allRollNumbers } } // check against members roll
+        // ]
+// });
+// if (duplicateRoll) {
+//     return res.status(409).json({
+//         message: "One or more roll numbers are already registered with another team."
+//     });
+// }
         
-
-
-        //old one
-
-        if (existingTeam) {
-    if (existingTeam.teamName === teamName) {
+if (existingRegistration) {
+    if (existingRegistration.teamName === teamName) {
         return res.status(409).json({ message: "This team name is already taken. Please choose a different name." });
     }
 
-    if (existingTeam.email === leader.email) {
+    if (existingRegistration.leaderEmail === leader.email) {
         return res.status(409).json({ message: "A team with this leader's email is already registered!" });
     }
 
-    if (existingTeam.phone === leader.phone) {
+    if (existingRegistration.leaderPhone === leader.phone) {
         return res.status(409).json({ message: "A team with this leader's phone number is already registered!" });
     }
 
-    if (existingTeam.roll === leader.roll) {
-        return res.status(409).json({ message: "A team with this leader's roll number is already registered!" });
+    if (conflictingRolls) {
+        return res.status(409).json({ message: `The roll number'${conflictingRolls}'are already registered with another team.` });
     }
 
-    if (existingTeam.transactionId === transactionId) {
+       const conflictingRolls = allRollNumbers.find(roll => 
+        existingRegistration.leaderRoll === roll || 
+        existingRegistration.teamMembers.some(member => member.StudentId === roll)
+    );
+
+    if (existingRegistration.transactionId === transactionId) {
         return res.status(409).json({ message: "This transaction ID has already been used for registration." });
     }
 
     // fallback
     return res.status(409).json({ message: "Duplicate registration detected. Please check your details." });
 }
+    
 
         console.log("📝 Attempting to save new registration...");
         const newTeam = new Registration({
@@ -165,6 +160,7 @@ if (duplicateRoll) {
             leaderPhone: leader.phone,
             teamMembers,
             transactionId,
+            paymentProofLink: driveLink
         });
 
         await newTeam.save();
