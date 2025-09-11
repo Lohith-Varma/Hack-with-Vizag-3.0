@@ -203,22 +203,47 @@ backToTopButton.addEventListener("click", function() {
 // FAQ Section
 // ===============================================================================================================
 
-const faqComponent = document.querySelector('.faq-container');
+// const faqComponent = document.querySelector('.faq-container');
 
-if (faqComponent) {
-const faqItems = faqComponent.querySelectorAll('.faq-item');
+// if (faqComponent) {
+// const faqItems = faqComponent.querySelectorAll('.faq-item');
 
-    faqItems.forEach(item => {
-        const questionButton = item.querySelector('.faq-question');
+//     faqItems.forEach(item => {
+//         const questionButton = item.querySelector('.faq-question');
 
-        questionButton.addEventListener('click', () => {
-            const currentlyActiveItem = faqComponent.querySelector('.faq-item.active');
+//         questionButton.addEventListener('click', () => {
+//             const currentlyActiveItem = faqComponent.querySelector('.faq-item.active');
             
-            if (currentlyActiveItem && currentlyActiveItem !== item) {
-                currentlyActiveItem.classList.remove('active');
-            }
-            item.classList.toggle('active');
-        });
-    });
-}
+//             if (currentlyActiveItem && currentlyActiveItem !== item) {
+//                 currentlyActiveItem.classList.remove('active');
+//             }
+//             item.classList.toggle('active');
+//         });
+//     });
+// }
 
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Select all the individual FAQ items
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    // Find the clickable question button within each item
+    const questionButton = item.querySelector('.faq-question');
+
+    questionButton.addEventListener('click', () => {
+      // Find if there's an item that is already open/active
+      const currentlyActiveItem = document.querySelector('.faq-item.active');
+
+      // If an active item exists and it's NOT the one we just clicked...
+      if (currentlyActiveItem && currentlyActiveItem !== item) {
+        // ...then remove the 'active' class from it to close it.
+        currentlyActiveItem.classList.remove('active');
+      }
+      
+      // Now, toggle the 'active' class on the item we clicked.
+      // If it's closed, it will open. If it's open, it will close.
+      item.classList.toggle('active');
+    });
+  });
+});
