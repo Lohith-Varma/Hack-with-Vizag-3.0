@@ -224,13 +224,14 @@ backToTopButton.addEventListener("click", function() {
 
 
 
-  const faqComponent = document.querySelector('.faq-container');
+// const faqComponent = document.querySelector('.faq-container');
 
 if (faqComponent) {
-    const faqItems = faqComponent.querySelectorAll('.faq-item');
+const faqItems = faqComponent.querySelectorAll('.faq-item');
 
-    faqItems.forEach(item => {
-        const questionButton = item.querySelector('.faq-question');
+  faqItems.forEach(item => {
+    // Find the clickable question button within each item
+    const questionButton = item.querySelector('.faq-question');
 
         questionButton.addEventListener('click', () => {
             const currentlyActiveItem = faqComponent.querySelector('.faq-item.active');
@@ -242,3 +243,4 @@ if (faqComponent) {
         });
     });
 }
+

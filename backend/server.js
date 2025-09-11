@@ -131,14 +131,16 @@ if (existingRegistration) {
         return res.status(409).json({ message: "A team with this leader's phone number is already registered!" });
     }
 
+      const conflictingRolls = allRollNumbers.find(roll => 
+        existingRegistration.leaderRoll === roll || 
+        existingRegistration.teamMembers.some(member => member.StudentId === roll)
+    );
+
     if (conflictingRolls) {
         return res.status(409).json({ message: `The roll number'${conflictingRolls}'are already registered with another team.` });
     }
 
-       const conflictingRolls = allRollNumbers.find(roll => 
-        existingRegistration.leaderRoll === roll || 
-        existingRegistration.teamMembers.some(member => member.StudentId === roll)
-    );
+     
 
     if (existingRegistration.transactionId === transactionId) {
         return res.status(409).json({ message: "This transaction ID has already been used for registration." });

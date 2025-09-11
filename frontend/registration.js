@@ -12,7 +12,7 @@ const responseMessage = document.getElementById('responseMessage');
 
 let currentSectionIndex = 0;
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = 'https://hackwithvizag-backend.onrender.com';
 
 // --- Step 2: Section Navigation Logic ---
 const showSection = (index) => {
