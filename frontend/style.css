@@ -1084,88 +1084,6 @@ min-height: 100vh;
 
     
 
-@media (min-width: 320px) and (max-width: 370px) {
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    margin: auto;
-    align-items: center;
-      padding: 5px; /* Even less padding for very small screens */
-  }
-
-  .logo-title {
-
-  display: flex; /* Helps align the letters */
-  /* font-size: 4rem;  Use your original font size */
-  font-weight: 600;
-  font-size: 240px;
-  margin: auto;
-  text-align: center;
-
-  /* width: 80%; */
-  color: rgb(170, 0, 0);
-  letter-spacing: 1px;
-}
-.p-1 {
-  display: flex;
-  margin: auto;
-  width: 300px;
-  text-align: center;
-  font-size: 18px;
-  margin-top: 10px;
-  color: rgba(0, 0, 0, 0.95);
-  font-weight: bold;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-
-
-  .registration-section {
-      width: 95%; 
-      margin-top: 15px;
-      padding: 5px 0;
-      box-shadow: none; 
-  }
-
-  #registration-form {
-      width: 80%; /* Use more of the screen width */
-      padding: 1rem; /* Reduce padding slightly more */
-      margin: 10px auto;
-  }
-
-  .registration-section h1 {
-      font-size: 1.6rem; /* Smaller title to prevent wrapping */
-      text-align: center;
-  }
-
-  .form-section, .form-section.active {
-    width: 78%;
-  }
-
-  .registration-section h2 {
-      font-size: 1.3rem; /* Smaller section titles */
-  }
-
-  #button-container button {
-      padding: 10px 14px; /* Adjust button padding */
-      font-size: 15px;
-  }
-
-  #register-button {
-      padding: 12px 20px;
-  }
-
-  #qr-code-image {
-      display: flex;
-      margin-left: auto;
-      margin-right: auto;
-      justify-content: center;
-      align-items: center;
-      width: 90%; /* Make QR code larger for easy scanning */
-  }
-  }
-
 
   /* --- Styles for Larger Mobile Phones (e.g., iPhone 12/13/14) --- */
   /* These styles will apply ONLY to screens between 371px and 425px wide */
@@ -1600,7 +1518,7 @@ min-height: 100vh;
 
   .logo-title {
   display: flex; /* Helps align the letters */
-  font-size: 9rem;  /* Use your original font size */
+  font-size: 5rem;  /* Use your original font size */
   font-weight: 700;
   margin: auto;
 
@@ -1633,6 +1551,229 @@ min-height: 100vh;
   #navbar ul li a {
     font-size: 0.9rem;
     padding: 8px 0;
+  }
+
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    margin: auto;
+    align-items: center;
+      /* padding: 5px;  */
+  }
+
+  .logo-title {
+
+  display: flex; /* Helps align the letters */
+  font-size: 4rem; 
+  font-weight: 600;
+  /* font-size: 240px; */
+  margin: auto;
+  text-align: center;
+
+  /* width: 80%; */
+  color: rgb(170, 0, 0);
+  letter-spacing: 1px;
+}
+.p-1 {
+  display: flex;
+  margin: auto;
+  width: 300px;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 10px;
+  color: rgba(0, 0, 0, 0.95);
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+
+  .registration-section {
+      width: 95%; 
+      margin-top: 15px;
+      padding: 5px 0;
+      box-shadow: none; 
+  }
+
+  #registration-form {
+      width: 80%; /* Use more of the screen width */
+      padding: 1rem; /* Reduce padding slightly more */
+      margin: 10px auto;
+  }
+
+  .registration-section h1 {
+      font-size: 1.6rem; /* Smaller title to prevent wrapping */
+      text-align: center;
+  }
+
+  .form-section, .form-section.active {
+    width: 78%;
+  }
+
+  .registration-section h2 {
+      font-size: 1.3rem; /* Smaller section titles */
+  }
+
+  #button-container button {
+      padding: 10px 14px; /* Adjust button padding */
+      font-size: 15px;
+  }
+
+  #register-button {
+      padding: 12px 20px;
+  }
+
+  .themes-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 100px auto 50px auto; */
+    margin: auto;
+    width: 100%;
+    max-width: 270px;
+    padding: 20px;
+    background-color: #e3f6ff;
+    color: #000;
+    border: 1.5px solid #fff;
+    border-radius: 8px;
+}
+
+.themes h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 40px;
+}
+
+.theme-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 40px;
+    justify-content: center;
+}
+
+.theme-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 200px;
+    height: 210px;
+    overflow: hidden;
+    border: 2px solid #000;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    padding: 15px;
+    transition: transform 0.3s ease;
+    background: #fff;
+}
+
+.theme-card img.theme-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    padding-bottom: 5px;
+}
+
+.theme-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(220, 237, 255, 0.95);
+    color: #1a2a4c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.theme-card:hover .theme-overlay {
+    opacity: 1;
+}
+
+.theme-card:hover {
+    transform: scale(1.05);
+}
+
+.prizes {
+  max-width: 300px; /* responsive */
+  border: 3px solid rgba(49, 104, 123, 0.4);
+  margin: 120px auto 56px;
+  border-radius: 12px;
+  color: #000;
+  text-align: center;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+.prizes h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.prize-details {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; /* ✅ responsive */
+}
+
+.prize-card {
+  width: 250px;
+  border-radius: 12px;
+  font-size: 16px;
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  border: 3px solid #000;
+  text-align: center;
+}
+
+.prize-card img {
+  height: 60px;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+.prize-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* 🏆 Medal Colors */
+.prize-card.first {
+  background: linear-gradient(135deg, #ffd700, #ffea70);
+}
+
+.prize-card.second {
+  background: linear-gradient(135deg, #c0c0c0, #e0e0e0);
+}
+
+.prize-card.third {
+  background: linear-gradient(135deg, #cd7f32, #e8a46c);
+}
+
+/* Typography inside cards */
+.prize-card p {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #111;
+}
+
+  #qr-code-image {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+      align-items: center;
+      width: 90%; /* Make QR code larger for easy scanning */
   }
 }
 
