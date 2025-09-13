@@ -20,7 +20,7 @@ navLinks.forEach(link => {
 // Countdown
 // ===============================================================================================================
 
-const countdownDate = new Date("Sep 26, 2025 07:00:00").getTime();
+const countdownDate = new Date("Sep 26, 2025 09:00:00").getTime();
 
 const countdownFunction = setInterval(() => {
     const now = new Date().getTime();
@@ -48,7 +48,7 @@ const countdownFunction = setInterval(() => {
 // Hero Section Typing Effect
 // ===============================================================================================================
 
-const text = "Join the ultimate 36-hour coding marathon to solve real-world problems.";
+const text = "Join the ultimate 30-hour coding marathon to solve real-world problems.";
 const typingElement = document.getElementById("typing-text");
 let index = 0;
 
@@ -62,94 +62,6 @@ function typeLetterByLetter() {
 
 window.onload = typeLetterByLetter;
 
-document.getElementById("registrationForm").addEventListener("submit", async (e) => {
-
-  e.preventDefault();
-
-  const responseMessageElement = document.getElementById("responseMessage");
-
-  responseMessageElement.textContent = "";
-
-  const teamName = document.getElementById("team-name").value.trim();
-  const collegeName = document.getElementById("college-name").value.trim();
-  const leaderName = document.getElementById("leader-name").value.trim();
-  const leaderRoll = document.getElementById("leader-roll").value.trim();
-  const leaderEmail = document.getElementById("leader-mail").value.trim();
-  const leaderPhone = document.getElementById("leader-phone").value.trim();
-  const member2Name = document.getElementById("member2-name").value.trim();
-  const member2Roll = document.getElementById("member2-roll").value.trim();
-  const member3Name = document.getElementById("member3-name").value.trim();
-  const member3Roll = document.getElementById("member3-roll").value.trim();
-  const member4Name = document.getElementById("member4-name").value.trim();
-  const member4Roll = document.getElementById("member4-roll").value.trim();
-
-  if (!teamName || !collegeName || !leaderName || !leaderRoll || !leaderEmail || !leaderPhone || !member2Name || !member2Roll || !member3Name || !member3Roll) {
-      responseMessageElement.textContent = "Please fill out all required fields.";
-      responseMessageElement.style.color = "red";
-      return; // Stop the function if validation fails
-  }
-
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!emailPattern.test(leaderEmail)) {
-    responseMessageElement.textContent = "Please enter a valid email address.";
-    responseMessageElement.style.color = "red";
-    return;
-  }
-
-  const phonePattern = /^\d{10}$/;
-  if(!phonePattern.test(leaderPhone)) {
-    responseMessageElement.textContent = "Please enter a valid 10-digit mobile number.";
-    responseMessageElement.style.color = "red";
-    return;
-  }
-
-  const registrationData = {
-    teamName,
-    collegeName,
-    leader: {
-      name: leaderName,
-      roll: leaderRoll,
-      email: leaderEmail,
-      phone: leaderPhone,
-    },
-    teamMembers: [
-      {name: member2Name, StudentId: member2Roll},
-      {name: member3Name, StudentId: member3Roll},
-    ],
-    transactionId: document.getElementById("transactionId").value
-  };
-
-  if (member4Name && member4Roll) {
-      registrationData.teamMembers.push({ name: member4Name, StudentId: member4Roll });
-  }
-
-  try{
-    responseMessageElement.textContent = "Submitting...";
-    responseMessageElement.style.color = "orange";
-
-    const response = await fetch("http://localhost:5000/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(registrationData),
-    }); 
-
-    const data = await response.json();
-
-    responseMessageElement.textContent = data.message;
-    responseMessageElement.style.color = response.ok ? "green" : "red";
-
-    if(response.ok) { 
-      document.getElementById("registrationForm").reset();
-    }
-  }
-
-  catch (error) {
-    console.error("Error:", error); 
-    responseMessageElement.textContent = "Error: Could not connect to the server.";
-    responseMessageElement.style.color = "red";
-  }
-
-});
 
 
 // let map;
@@ -158,7 +70,13 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
 
 //         const location = { lat: 17.8691423, lng: 83.2956262 }; //NSRIT CSE Block
 
-//     const { Map } = await google.maps.importLibrary("maps");
+//     const { Map } = document.getElementById("registrationForm").addEventListener("submit", async (e) => {
+
+//   e.preventDefault();
+
+
+
+// await google.maps.importLibrary("maps");
 
 //     // The map, centered at the specified location
 //     map = new Map(document.getElementById("map"), {
@@ -169,7 +87,7 @@ document.getElementById("registrationForm").addEventListener("submit", async (e)
 //     // Add a marker for the location
 //     new google.maps.Marker({
 //         position: location,
-//         map: map,
+//         map: map,  
 //         title: "New York City"
 //     });
 // }
@@ -203,47 +121,21 @@ backToTopButton.addEventListener("click", function() {
 // FAQ Section
 // ===============================================================================================================
 
-// const faqComponent = document.querySelector('.faq-container');
+const faqComponent = document.querySelector('.faq-container');
 
-// if (faqComponent) {
-// const faqItems = faqComponent.querySelectorAll('.faq-item');
+if (faqComponent) {
+const faqItems = faqComponent.querySelectorAll('.faq-item');
 
-//     faqItems.forEach(item => {
-//         const questionButton = item.querySelector('.faq-question');
+    faqItems.forEach(item => {
+        const questionButton = item.querySelector('.faq-question');
 
-//         questionButton.addEventListener('click', () => {
-//             const currentlyActiveItem = faqComponent.querySelector('.faq-item.active');
+        questionButton.addEventListener('click', () => {
+            const currentlyActiveItem = faqComponent.querySelector('.faq-item.active');
             
-//             if (currentlyActiveItem && currentlyActiveItem !== item) {
-//                 currentlyActiveItem.classList.remove('active');
-//             }
-//             item.classList.toggle('active');
-//         });
-//     });
-// }
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Select all the individual FAQ items
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  faqItems.forEach(item => {
-    // Find the clickable question button within each item
-    const questionButton = item.querySelector('.faq-question');
-
-    questionButton.addEventListener('click', () => {
-      // Find if there's an item that is already open/active
-      const currentlyActiveItem = document.querySelector('.faq-item.active');
-
-      // If an active item exists and it's NOT the one we just clicked...
-      if (currentlyActiveItem && currentlyActiveItem !== item) {
-        // ...then remove the 'active' class from it to close it.
-        currentlyActiveItem.classList.remove('active');
-      }
-      
-      // Now, toggle the 'active' class on the item we clicked.
-      // If it's closed, it will open. If it's open, it will close.
-      item.classList.toggle('active');
+            if (currentlyActiveItem && currentlyActiveItem !== item) {
+                currentlyActiveItem.classList.remove('active');
+            }
+            item.classList.toggle('active');
+        });
     });
-  });
-});
+  }

@@ -839,7 +839,7 @@ min-height: 100vh;
     }
 
     .faq-section {
-        width: 100%;
+        width: 85%;
         max-width: 700px;
         text-align: center;
     }
@@ -887,6 +887,7 @@ min-height: 100vh;
     }
 
     .faq-question:hover {
+      cursor: pointer;
         color: #8d0801;
     }
 
