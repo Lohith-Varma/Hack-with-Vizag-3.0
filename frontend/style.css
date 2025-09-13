@@ -22,7 +22,7 @@ body {
   position: sticky;
   top: 0;
   background: linear-gradient(90deg, #582f0e, #936639, #d5bdaf);
-  padding: 15px 20px;
+  /* padding: 15px 20px; */
   display: flex;
   align-items: center;
   /* width: 100%; */
@@ -1516,6 +1516,20 @@ min-height: 100vh;
 /* ✅ Extra small devices (<=360px) */
 /* ========================= */
 @media (max-width: 360px) {
+
+  header {
+  width: 426px; 
+  position: sticky;
+  top: 0;
+  background: linear-gradient(90deg, #582f0e, #936639, #d5bdaf);
+  /* padding: 15px 20px; */
+  padding: 15px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+ }
 
   .logo-title {
   display: flex; /* Helps align the letters */
