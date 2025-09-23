@@ -612,6 +612,11 @@ min-height: 100vh;
   color: #111;
 }
 
+.consolation-prizes {
+  margin-bottom: 20px;
+}
+
+
     .themes-section {
     display: flex;
     justify-content: center;
@@ -1093,6 +1098,20 @@ min-height: 100vh;
       padding: 10px; /* Reduce padding on the body for more space */
   }
 
+    header {
+  width: 420px; 
+  position: sticky;
+  top: 0;
+  background: linear-gradient(90deg, #582f0e, #936639, #d5bdaf);
+  /* padding: 15px 20px; */
+  padding: 15px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+ }
+
   .registration-section {
       width: 95%; /* Make the main container use the full screen width */
       margin-top: 20px; /* Reduce the top margin */
@@ -1146,18 +1165,19 @@ min-height: 100vh;
 /* ========================= */
 @media (max-width: 426px) {
 
-  /* header {
-    /* width: 426px; 
+   header {
+  width: 426px; 
   position: sticky;
   top: 0;
   background: linear-gradient(90deg, #582f0e, #936639, #d5bdaf);
-  padding: 15px 20px;
+  /* padding: 15px 20px; */
+  padding: 15px;
   display: flex;
   width: 100%;
   align-items: center;
   z-index: 1000;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-} */
+ }
 
 
    .logo-title {
