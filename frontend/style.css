@@ -593,11 +593,11 @@ min-height: 100vh;
 
 /* 🏆 Medal Colors */
 .prize-card.first {
-  background: linear-gradient(135deg, #ffd700, #ffea70);
+  background: linear-gradient(135deg, #ffed86, #f1e59f);
 }
 
 .prize-card.second {
-  background: linear-gradient(135deg, #c0c0c0, #e0e0e0);
+  background: linear-gradient(135deg, #d2d0d0, #ffffff);
 }
 
 .prize-card.third {
